@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>spring security</title>
+    <script src="/assets/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="username">
+        <input type="text" name="password">
+        <a href="javascript:void(0)" onclick="login()">登录</a>
+    </div>
+
+    <div>
+        <a href="javascript:void(0)" onclick="data()">data</a>
+    </div>
+    <script>
+        function login() {
+            var username = document.getElementsByName("username")[0].value;
+            var password = document.getElementsByName("password")[0].value;
+            $.ajax({
+                type: "post",
+                url: "/login",
+                data: { "username": username, "password": password },
+                success: function (response) {
+                    console.log(response);
+                },
+                complete: function (xhr) {
+                    // headers = xhr.getAllResponseHeaders();
+                    // 获得指定的字段
+                    var token = xhr.getResponseHeader("token");
+                    console.log(token);
+                    localStorage.setItem("token", token)
+                }
+            });
+        }
+
+        function data(){
+            $.ajax({
+                type: "get",
+                url: "/data",
+                headers: {"authorization": localStorage.getItem("token")}
+            });
+        }
+
+    </script>
+</body>
+
+</html>

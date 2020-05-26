@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>priv.lyq</groupId>
-    <artifactId>sboot</artifactId>
+    <artifactId>springboot-exercises</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <description>聚合项目 关于spring/springboot框架中功能的练习</description>
@@ -24,15 +24,25 @@
     </properties>
 
     <modules>
-        <module>sboot-security</module>
+        <module>springboot-security</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->
     <dependencies>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>-->
+
+        <!-- 工具 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.68</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
+        </dependency>
+
     </dependencies>
 
 </project>
