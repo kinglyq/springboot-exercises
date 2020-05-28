@@ -25,12 +25,19 @@
 
     <modules>
         <module>springboot-security</module>
+        <module>springboot-multiple-datasources</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->
     <dependencies>
 
         <!-- 工具 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -44,5 +51,14 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

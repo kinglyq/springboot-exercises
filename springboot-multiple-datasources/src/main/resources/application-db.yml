@@ -1,0 +1,14 @@
+database-config:
+  mybatis:
+    configLocation: classpath:config/mybatis-configuration.xml
+    mapperLocations: classpath:mapper/**/*.xml
+  datasource:
+    NARCOS_1:
+      url: jdbc:mysql://localhost:3306/narcos-1?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: rootadmin
+      defaultDb: true
+    NARCOS_2:
+      url: jdbc:mysql://localhost:3306/narcos-2?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: rootadmin

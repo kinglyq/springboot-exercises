@@ -1,0 +1,23 @@
+server:
+  port: 1616
+  servlet:
+    session:
+      timeout: 1h
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+  profiles:
+#    active: db
+    include:
+      - db
+
+logging:
+  level:
+   priv.lyq.narcos.file.library.mapper: debug
+
+demo:
+  name: jack
+  age: 57
+  gender: true
