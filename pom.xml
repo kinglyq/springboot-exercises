@@ -26,10 +26,18 @@
     <modules>
         <module>springboot-security</module>
         <module>springboot-multiple-datasources</module>
+        <module>springboot-simpleweb</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
 
         <!-- 工具 -->
         <dependency>
