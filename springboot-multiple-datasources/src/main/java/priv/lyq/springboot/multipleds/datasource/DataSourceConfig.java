@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Slf4j
 @Configuration

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Getter
 @Setter

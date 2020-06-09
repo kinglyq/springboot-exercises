@@ -11,7 +11,7 @@ import priv.lyq.springboot.multipleds.service.DemoService;
 import javax.annotation.Resource;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Slf4j
 @Service

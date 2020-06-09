@@ -1,7 +1,7 @@
 package priv.lyq.springboot.multipleds.util;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public class NarcosFileUtis {
 }

@@ -3,7 +3,7 @@ package priv.lyq.springboot.multipleds.entity;
 import lombok.Data;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Data
 public class DemoProperties {

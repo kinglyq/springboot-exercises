@@ -1,15 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <title>Document</title>
+    <script src="/assets/js/jquery-3.5.1.min.js"></script>
 </head>
+
 <body>
 
-    <p>simple web</p>
+    <a href="javascript:void(0)" id="login">complete</a>
+
+    <a href="javascript:void(0)" onclick="nativeAjax()">nativeAjax</a>
+
+    <a href="javascript:void(0)" id="trigger">trigger</a>
+
+    <script>
+
+        $.ajaxSetup({
+            dataType: "json"
+        });
+
+        $(document).ajaxSend(function (event, jqxhr, settings) {
+            jqxhr.setRequestHeader("before", "ajaxSend");
+        });
+
+        $(document).ajaxComplete(function (event, jqxhr, settings) {
+            /*for (var i = 0; i < arguments.length; i++) {
+                console.log(arguments[i]);
+            }*/
+            console.log(jqxhr.getAllResponseHeaders());
+            var headers = jqxhr.getAllResponseHeaders();
+            if (headers.visit !== "true") {
+                console.log("拒绝访问");
+            }
+        });
+
+        var login = $("#login").click(function (e) {
+            e.preventDefault();
+            $.ajax("/user/login", {
+                type: "post"
+            }).done(function (data) {
+                console.log(data.code);
+            }).fail(function (xhr, status) {
+
+            }).always(function () {
+
+            });
+        });
+
+        /* login.always(function () {
+        }); */
+
+        function nativeAjax() {
+            const request = new XMLHttpRequest();
+            request.open("post", "/user/login", "true");
+            request.send();
+        }
+
+        $("#trigger").click(function (e) { 
+            e.preventDefault();
+            alert("123");
+        });
+
+        // $("#trigger").trigger("click");
+
+    </script>
 
 </body>
-</html>   
-    
+
+</html>

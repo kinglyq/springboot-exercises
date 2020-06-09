@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * DataSource与Mybatis的配置
  *
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Getter
 @Setter

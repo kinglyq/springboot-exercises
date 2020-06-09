@@ -3,7 +3,7 @@ package priv.lyq.springboot.multipleds.service;
 import priv.lyq.springboot.multipleds.entity.User;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public interface DemoService {
 

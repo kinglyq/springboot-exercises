@@ -1,7 +1,7 @@
 package priv.lyq.springboot.multipleds.datasource;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public enum Database {
 

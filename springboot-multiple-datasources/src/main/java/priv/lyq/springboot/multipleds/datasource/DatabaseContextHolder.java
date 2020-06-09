@@ -3,7 +3,7 @@ package priv.lyq.springboot.multipleds.datasource;
 import org.springframework.util.Assert;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public class DatabaseContextHolder {
 

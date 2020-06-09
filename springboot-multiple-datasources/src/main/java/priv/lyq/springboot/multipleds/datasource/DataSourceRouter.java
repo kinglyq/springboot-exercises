@@ -3,7 +3,7 @@ package priv.lyq.springboot.multipleds.datasource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public class DataSourceRouter extends AbstractRoutingDataSource {
 

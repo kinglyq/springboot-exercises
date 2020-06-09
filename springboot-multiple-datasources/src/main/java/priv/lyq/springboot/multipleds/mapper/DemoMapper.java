@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import priv.lyq.springboot.multipleds.entity.User;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 public interface DemoMapper {
 
