@@ -25,12 +25,19 @@
 
     <modules>
         <module>springboot-security</module>
-        <module>springboot-multiple-datasources</module>
+        <module>springboot-multiple-datasource</module>
         <module>springboot-simpleweb</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->
     <dependencies>
+
+        <!-- 防止使用idea运行测试时提示错误Failed to resolve org.junit.platform:junit-platform-launcher -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

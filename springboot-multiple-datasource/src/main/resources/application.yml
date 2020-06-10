@@ -1,0 +1,18 @@
+server:
+  port: 9702
+  servlet:
+    session:
+      timeout: 1h
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+  profiles:
+#    active: db
+    include:
+      - db
+
+logging:
+  level:
+    priv.lyq.springboot.multipleds.mapper: debug

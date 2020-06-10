@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="priv.lyq.springboot.multipleds.mapper.UserMapper">
+<mapper namespace="priv.lyq.springboot.security.mapper.UserMapper">
 
-    <resultMap id="user" type="priv.lyq.springboot.multipleds.entity.User">
+    <resultMap id="user" type="priv.lyq.springboot.security.entity.User">
         <id property="id" column="uid"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
-        <collection property="authorities" ofType="priv.lyq.springboot.multipleds.entity.Role">
+        <collection property="authorities" ofType="priv.lyq.springboot.security.entity.Role">
             <id property="id" column="rid"/>
             <result property="name" column="name"/>
         </collection>
-        <collection property="pages" ofType="priv.lyq.springboot.multipleds.entity.Page">
+        <collection property="pages" ofType="priv.lyq.springboot.security.entity.Page">
             <id property="id" column="pid"/>
             <result property="addr" column="addr"/>
-            <collection property="buttons" ofType="priv.lyq.springboot.multipleds.entity.Button">
+            <collection property="buttons" ofType="priv.lyq.springboot.security.entity.Button">
                 <id property="id" column="bid"/>
                 <result property="hyperlink" column="hyperlink"/>
             </collection>
