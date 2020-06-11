@@ -1,2 +1,10 @@
 server:
   port: 9703
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: rootadmin
+    url: jdbc:mysql://localhost:3306/springboot_exercises?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver

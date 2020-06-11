@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author: Yuqing Li
+ * @author Yuqing Li
  */
 @Data
 public class Page {

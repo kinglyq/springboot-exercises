@@ -21,7 +21,7 @@
     </resultMap>
 
     <select id="selectUserByName" resultMap="user">
-        select u.id AS "uid",
+        SELECT u.id AS "uid",
                u.username,
                CONCAT("{bcrypt}", u.password) AS "password",
                r.id AS "rid",
@@ -31,20 +31,20 @@
                p.icon,
                b.id AS "bid",
                b.hyperlink
-        from user u
-                 left join user_role ur on
+        FROM user u
+                 LEFT JOIN user_role ur ON
             u.id = ur.user_id
-                 left join role r on
+                 LEFT JOIN role r ON
             r.id = ur.role_id
-                 left join role_button rb on
+                 LEFT JOIN role_button rb ON
             r.id = rb.role_id
-                 left join button b on
+                 LEFT JOIN button b ON
             b.id = rb.button_id
-                 left join page_button pb on
+                 LEFT JOIN page_button pb ON
             pb.id = b.id
-                 left join page p on
+                 LEFT JOIN page p ON
             p.id = pb.page_id
-        where u.id = #{username}
+        WHERE u.id = #{username}
     </select>
 
 </mapper>

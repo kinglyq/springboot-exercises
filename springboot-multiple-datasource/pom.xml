@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>priv.lyq.springboot-exercises</groupId>
-    <artifactId>springboot-multiple-datasources</artifactId>
+    <artifactId>springboot-multiple-datasource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-multiple-datasource</name>
     <description>Springboot Multiple data sources</description>

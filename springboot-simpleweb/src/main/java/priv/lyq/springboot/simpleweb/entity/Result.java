@@ -8,6 +8,7 @@ import java.util.HashMap;
  * @author Yuqing Li
  */
 public class Result extends HashMap<String, Object> {
+
     private static final long serialVersionUID = 8374868085789893949L;
 
     private static final int INITIAL_CAPACITY = 16;
