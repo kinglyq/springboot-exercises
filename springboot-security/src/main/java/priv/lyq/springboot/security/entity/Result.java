@@ -1,6 +1,6 @@
 package priv.lyq.springboot.security.entity;
 
-import priv.lyq.springboot.simpleweb.enums.ResponseCode;
+import priv.lyq.springboot.security.enums.ResponseCode;
 
 import java.util.HashMap;
 

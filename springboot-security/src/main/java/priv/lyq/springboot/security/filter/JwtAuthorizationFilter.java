@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import priv.lyq.springboot.security.entity.Result;
 import priv.lyq.springboot.security.enums.ResponseCode;
-import priv.lyq.springboot.simpleweb.util.JwtTokenUtil;
+import priv.lyq.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
