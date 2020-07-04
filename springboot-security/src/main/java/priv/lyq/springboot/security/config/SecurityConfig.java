@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import priv.lyq.springboot.simpleweb.filter.JwtAuthenticationEntryPoint;
-import priv.lyq.springboot.simpleweb.filter.JwtAuthenticationFilter;
-import priv.lyq.springboot.simpleweb.filter.JwtAuthorizationFilter;
+import priv.lyq.springboot.security.filter.JwtAuthenticationEntryPoint;
+import priv.lyq.springboot.security.filter.JwtAuthenticationFilter;
+import priv.lyq.springboot.security.filter.JwtAuthorizationFilter;
 
 import javax.annotation.Resource;
 
