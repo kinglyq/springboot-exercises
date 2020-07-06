@@ -25,7 +25,7 @@
 
     <modules>
         <module>springboot-security</module>
-        <module>springboot-multiple-datasource</module>
+        <module>springboot-datasource</module>
         <module>springboot-web</module>
     </modules>
 
