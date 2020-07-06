@@ -1,13 +1,13 @@
-package priv.lyq.springboot.multipleds.service;
+package priv.lyq.springboot.datasource.mapper;
 
-import priv.lyq.springboot.multipleds.entity.MultipleTest;
+import priv.lyq.springboot.datasource.entity.MultipleTest;
 
 import java.util.List;
 
 /**
  * @author Yuqing Li
  */
-public interface MultipleTestService {
+public interface MultipleTestMapper {
 
     /**
      * 查询多条记录

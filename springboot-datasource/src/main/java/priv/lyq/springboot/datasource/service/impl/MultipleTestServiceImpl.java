@@ -1,11 +1,11 @@
-package priv.lyq.springboot.multipleds.service.impl;
+package priv.lyq.springboot.datasource.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import priv.lyq.springboot.multipleds.entity.MultipleTest;
-import priv.lyq.springboot.multipleds.mapper.MultipleTestMapper;
-import priv.lyq.springboot.multipleds.service.MultipleTestService;
+import priv.lyq.springboot.datasource.entity.MultipleTest;
+import priv.lyq.springboot.datasource.mapper.MultipleTestMapper;
+import priv.lyq.springboot.datasource.service.MultipleTestService;
 
 import javax.annotation.Resource;
 import java.util.List;

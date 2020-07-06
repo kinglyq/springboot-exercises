@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds;
+package priv.lyq.springboot.datasource;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan({
     "priv.lyq.springboot.multipleds.mapper"
 })
-public class SpringbootMultipleDsApplication {
+public class SpringbootDatasourceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootMultipleDsApplication.class, args);
+        SpringApplication.run(SpringbootDatasourceApplication.class, args);
     }
 }

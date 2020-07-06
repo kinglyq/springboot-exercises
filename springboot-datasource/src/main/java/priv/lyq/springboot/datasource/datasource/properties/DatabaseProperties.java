@@ -1,10 +1,10 @@
-package priv.lyq.springboot.multipleds.datasource.properties;
+package priv.lyq.springboot.datasource.datasource.properties;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import priv.lyq.springboot.multipleds.datasource.Database;
+import priv.lyq.springboot.datasource.datasource.Database;
 
 import java.util.Map;
 

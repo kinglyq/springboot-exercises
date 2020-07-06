@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds.datasource.properties;
+package priv.lyq.springboot.datasource.datasource.properties;
 
 import lombok.Getter;
 import lombok.Setter;

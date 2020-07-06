@@ -1,11 +1,11 @@
-package priv.lyq.springboot.multipleds.mapper;
+package priv.lyq.springboot.datasource.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import priv.lyq.springboot.multipleds.datasource.Database;
-import priv.lyq.springboot.multipleds.datasource.DatabaseContextHolder;
-import priv.lyq.springboot.multipleds.entity.MultipleTest;
+import priv.lyq.springboot.datasource.datasource.Database;
+import priv.lyq.springboot.datasource.datasource.DatabaseContextHolder;
+import priv.lyq.springboot.datasource.entity.MultipleTest;
 
 import javax.annotation.Resource;
 import java.util.List;

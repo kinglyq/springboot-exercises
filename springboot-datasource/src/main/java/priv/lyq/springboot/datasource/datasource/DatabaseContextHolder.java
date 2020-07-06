@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds.datasource;
+package priv.lyq.springboot.datasource.datasource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;

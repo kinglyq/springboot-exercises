@@ -1,8 +1,8 @@
-package priv.lyq.springboot.multipleds.service;
+package priv.lyq.springboot.datasource.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import priv.lyq.springboot.multipleds.entity.MultipleTest;
+import priv.lyq.springboot.datasource.entity.MultipleTest;
 
 import javax.annotation.Resource;
 

@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds.entity;
+package priv.lyq.springboot.datasource.entity;
 
 import lombok.Data;
 

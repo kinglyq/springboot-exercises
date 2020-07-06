@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds.datasource;
+package priv.lyq.springboot.datasource.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

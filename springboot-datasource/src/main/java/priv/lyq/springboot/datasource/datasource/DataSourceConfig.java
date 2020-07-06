@@ -1,4 +1,4 @@
-package priv.lyq.springboot.multipleds.datasource;
+package priv.lyq.springboot.datasource.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import priv.lyq.springboot.multipleds.datasource.properties.DataSourceProperties;
-import priv.lyq.springboot.multipleds.datasource.properties.DatabaseProperties;
+import priv.lyq.springboot.datasource.datasource.properties.DataSourceProperties;
+import priv.lyq.springboot.datasource.datasource.properties.DatabaseProperties;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
