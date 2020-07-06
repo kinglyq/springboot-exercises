@@ -1,4 +1,4 @@
-package priv.lyq.springboot.simpleweb.filter;
+package priv.lyq.springboot.web.filter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

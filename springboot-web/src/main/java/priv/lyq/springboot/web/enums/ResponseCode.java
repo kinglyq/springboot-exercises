@@ -1,4 +1,4 @@
-package priv.lyq.springboot.simpleweb.enums;
+package priv.lyq.springboot.web.enums;
 
 /**
  * @author Yuqing Li

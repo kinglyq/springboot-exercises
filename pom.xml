@@ -26,7 +26,7 @@
     <modules>
         <module>springboot-security</module>
         <module>springboot-multiple-datasource</module>
-        <module>springboot-simpleweb</module>
+        <module>springboot-web</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->

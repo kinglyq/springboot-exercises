@@ -1,9 +1,9 @@
-package priv.lyq.springboot.simpleweb.controller;
+package priv.lyq.springboot.web.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import priv.lyq.springboot.simpleweb.entity.Result;
+import priv.lyq.springboot.web.entity.Result;
 
 import javax.servlet.http.HttpServletRequest;
 

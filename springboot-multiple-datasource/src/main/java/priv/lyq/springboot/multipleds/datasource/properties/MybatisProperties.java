@@ -1,4 +1,4 @@
-package priv.lyq.springboot.simpleweb.multipleds.properties;
+package priv.lyq.springboot.web.multipleds.properties;
 
 import lombok.Getter;
 import lombok.Setter;

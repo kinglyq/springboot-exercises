@@ -1,10 +1,10 @@
-package priv.lyq.springboot.simpleweb;
+package priv.lyq.springboot.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootSimpleWebApplicationTests {
+class SpringbootWebApplicationTests {
 
     @Test
     void contextLoads() {

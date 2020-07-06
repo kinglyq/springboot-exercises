@@ -1,6 +1,6 @@
-package priv.lyq.springboot.simpleweb.entity;
+package priv.lyq.springboot.web.entity;
 
-import priv.lyq.springboot.simpleweb.enums.ResponseCode;
+import priv.lyq.springboot.web.enums.ResponseCode;
 
 import java.util.HashMap;
 

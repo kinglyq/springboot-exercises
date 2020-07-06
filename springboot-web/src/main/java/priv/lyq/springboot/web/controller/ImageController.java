@@ -1,10 +1,10 @@
-package priv.lyq.springboot.simpleweb.controller;
+package priv.lyq.springboot.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import priv.lyq.springboot.simpleweb.entity.VerifyCode;
+import priv.lyq.springboot.web.entity.VerifyCode;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

@@ -10,7 +10,7 @@
     
     <!-- 定义别名 -->
     <typeAliases>
-        <package name="priv.lyq.springboot.simpleweb.entity"/>
+        <package name="priv.lyq.springboot.web.entity"/>
     </typeAliases>
     
 </configuration>

@@ -1,4 +1,4 @@
-package priv.lyq.springboot.simpleweb.entity;
+package priv.lyq.springboot.web.entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

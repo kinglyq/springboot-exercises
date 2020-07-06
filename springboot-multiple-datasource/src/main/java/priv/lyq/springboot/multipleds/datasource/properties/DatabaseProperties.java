@@ -22,7 +22,7 @@ public class DatabaseProperties {
     /**
      * mybatis配置
      */
-    private priv.lyq.springboot.simpleweb.multipleds.properties.MybatisProperties mybatis;
+    private priv.lyq.springboot.web.multipleds.properties.MybatisProperties mybatis;
 
     /**
      * 默认数据源

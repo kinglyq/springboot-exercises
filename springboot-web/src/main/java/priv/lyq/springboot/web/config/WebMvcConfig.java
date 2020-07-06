@@ -1,11 +1,11 @@
-package priv.lyq.springboot.simpleweb.config;
+package priv.lyq.springboot.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import priv.lyq.springboot.simpleweb.filter.RequestFilter;
+import priv.lyq.springboot.web.filter.RequestFilter;
 
 import javax.annotation.Resource;
 import java.util.List;
