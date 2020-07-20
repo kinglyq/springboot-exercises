@@ -18,7 +18,7 @@ import priv.lyq.springboot.security.filter.JwtAuthorizationFilter;
 import javax.annotation.Resource;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

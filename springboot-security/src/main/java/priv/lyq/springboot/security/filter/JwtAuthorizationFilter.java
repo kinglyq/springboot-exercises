@@ -1,6 +1,6 @@
 package priv.lyq.springboot.security.filter;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -9,8 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import priv.lyq.springboot.security.entity.Result;
-import priv.lyq.springboot.security.enums.ResponseCode;
+import priv.lyq.springboot.common.response.ResponseResult;
+import priv.lyq.springboot.common.response.ResponseStatus;
 import priv.lyq.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
@@ -24,7 +24,7 @@ import java.util.Collection;
 /**
  * 登录成功后 走此类进行鉴权操作
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -45,17 +45,18 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // 去掉前缀 获取Token字符串
         token = token.replace(JwtTokenUtil.TOKEN_PREFIX, "");
         Claims claims = JwtTokenUtil.checkToken(token);
-        ResponseCode resp;
+        final ObjectMapper objectMapper = new ObjectMapper();
+        ResponseStatus resp;
         // token解析错误
         if (null == claims) {
-            resp = ResponseCode.TOKEN_PARSING_ERROR;
-            response.getWriter().write(JSON.toJSONString(Result.error(resp.code, resp.desc)));
+            resp = ResponseStatus.TOKEN_PARSING_ERROR;
+            response.getWriter().write(objectMapper.writeValueAsString(ResponseResult.error(resp)));
             return;
         }
         // token过期
         if (JwtTokenUtil.isExpiration(token)) {
-            resp = ResponseCode.TOKEN_EXPIRED;
-            response.getWriter().write(JSON.toJSONString(Result.error(resp.code, resp.desc)));
+            resp = ResponseStatus.TOKEN_EXPIRED;
+            response.getWriter().write(objectMapper.writeValueAsString(ResponseResult.error(resp)));
             return;
         }
         // 从token中解密获取用户名

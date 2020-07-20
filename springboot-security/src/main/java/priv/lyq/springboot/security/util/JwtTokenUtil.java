@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
 import java.util.Date;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Slf4j
 public class JwtTokenUtil {

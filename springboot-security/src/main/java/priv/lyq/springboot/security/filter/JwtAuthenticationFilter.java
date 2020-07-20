@@ -1,16 +1,16 @@
 package priv.lyq.springboot.security.filter;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import priv.lyq.springboot.security.entity.Result;
+import priv.lyq.springboot.common.response.ResponseResult;
+import priv.lyq.springboot.common.response.ResponseStatus;
 import priv.lyq.springboot.security.entity.Role;
 import priv.lyq.springboot.security.entity.User;
-import priv.lyq.springboot.security.enums.ResponseCode;
 import priv.lyq.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 登录拦截器
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -54,43 +54,43 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         // 设置token
         response.setHeader("token", JwtTokenUtil.TOKEN_PREFIX + token);
-        response.getWriter().write(JSON.toJSONString(Result.success("登录成功")));
+        response.getWriter().write(new ObjectMapper().writeValueAsString(ResponseResult.success()));
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
-        ResponseCode resp;
+        ResponseStatus resp;
         // 账号过期
         if (failed instanceof AccountExpiredException) {
-            resp = ResponseCode.ACCOUNT_EXPIRED;
+            resp = ResponseStatus.ACCOUNT_EXPIRED;
         }
         // 密码错误
         else if (failed instanceof BadCredentialsException) {
-            resp = ResponseCode.WRONG_PASSWORD;
+            resp = ResponseStatus.WRONG_PASSWORD;
         }
         // 密码过期
         else if (failed instanceof CredentialsExpiredException) {
-            resp = ResponseCode.PASSWORD_EXPIRED;
+            resp = ResponseStatus.PASSWORD_EXPIRED;
         }
         // 账号不可用
         else if (failed instanceof DisabledException) {
-            resp = ResponseCode.ACCOUNT_UNAVAILABLE;
+            resp = ResponseStatus.ACCOUNT_UNAVAILABLE;
         }
         // 账号锁定
         else if (failed instanceof LockedException) {
-            resp = ResponseCode.ACCOUNT_LOCKED;
+            resp = ResponseStatus.ACCOUNT_LOCKED;
         }
         // 用户不存在
         else if (failed instanceof InternalAuthenticationServiceException) {
-            resp = ResponseCode.USER_NOT_FOUND;
+            resp = ResponseStatus.USER_NOT_FOUND;
         }
         // 其他错误
         else {
-            resp = ResponseCode.UNKNOWN_MISTAKE;
+            resp = ResponseStatus.INTERNAL_SERVER_ERROR;
         }
         response.setCharacterEncoding("UTF-8");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         // 将反馈通过HttpServletResponse中返回给前台
-        response.getWriter().write(JSON.toJSONString(Result.error(resp.code, resp.desc)));
+        response.getWriter().write(new ObjectMapper().writeValueAsString(resp));
     }
 }

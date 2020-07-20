@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import priv.lyq.springboot.security.entity.User;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public interface UserMapper {
 

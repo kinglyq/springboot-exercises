@@ -10,7 +10,7 @@ import priv.lyq.springboot.security.mapper.UserMapper;
 import javax.annotation.Resource;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
