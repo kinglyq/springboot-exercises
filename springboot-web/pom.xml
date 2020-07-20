@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>priv.lyq</groupId>
+        <groupId>priv.lyq.spring</groupId>
         <artifactId>springboot-exercises</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
         <relativePath/>
     </parent>
-    <groupId>priv.lyq.springboot-exercises</groupId>
-    <artifactId>springboot-simpleweb</artifactId>
+
+    <artifactId>springboot-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-simple-web</name>
+    <name>springboot-web</name>
     <description>Springboot web</description>
 
     <properties>
@@ -54,7 +56,13 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.22</version>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>priv.lyq.spring</groupId>
+            <artifactId>springboot-common</artifactId>
+            <version>${springboot-common.version}</version>
         </dependency>
 
         <dependency>

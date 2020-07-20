@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public class VerifyCode {
     /**

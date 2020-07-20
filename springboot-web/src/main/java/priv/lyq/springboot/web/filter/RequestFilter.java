@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Component
 public class RequestFilter extends HandlerInterceptorAdapter {
