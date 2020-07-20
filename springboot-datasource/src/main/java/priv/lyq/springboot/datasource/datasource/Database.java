@@ -3,7 +3,7 @@ package priv.lyq.springboot.datasource.datasource;
 /**
  * 数据库唯一标识
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public enum Database {
 

@@ -1,10 +1,10 @@
-package priv.lyq.springboot.web.multipleds.properties;
+package priv.lyq.springboot.datasource.datasource.properties;
 
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Getter
 @Setter

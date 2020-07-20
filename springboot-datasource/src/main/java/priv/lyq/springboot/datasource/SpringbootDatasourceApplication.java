@@ -5,11 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @SpringBootApplication
 @MapperScan({
-    "priv.lyq.springboot.multipleds.mapper"
+    "priv.lyq.springboot.datasource.mapper"
 })
 public class SpringbootDatasourceApplication {
     public static void main(String[] args) {

@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * DataSource与Mybatis的配置
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class DatabaseProperties {
     /**
      * mybatis配置
      */
-    private priv.lyq.springboot.web.multipleds.properties.MybatisProperties mybatis;
+    private MybatisProperties mybatis;
 
     /**
      * 默认数据源

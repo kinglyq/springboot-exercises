@@ -5,7 +5,7 @@ import priv.lyq.springboot.datasource.entity.MultipleTest;
 import java.util.List;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public interface MultipleTestMapper {
 

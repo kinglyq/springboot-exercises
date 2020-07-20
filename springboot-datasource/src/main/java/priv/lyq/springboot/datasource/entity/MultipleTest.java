@@ -1,11 +1,13 @@
 package priv.lyq.springboot.datasource.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
-@Data
+@Getter
+@Setter
 public class MultipleTest {
 
     private Integer id;

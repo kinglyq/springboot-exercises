@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Slf4j
 @Service

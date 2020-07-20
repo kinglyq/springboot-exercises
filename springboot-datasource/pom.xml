@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>priv.lyq</groupId>
+        <groupId>priv.lyq.spring</groupId>
         <artifactId>springboot-exercises</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
         <relativePath/>
     </parent>
-    <groupId>priv.lyq.springboot-exercises</groupId>
-    <artifactId>springboot-multiple-datasource</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-multiple-datasource</name>
-    <description>Springboot Multiple data sources</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <artifactId>springboot-datasource</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springboot-datasource</name>
+    <description>Springboot Multiple data sources</description>
 
     <dependencies>
 
@@ -34,7 +32,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.2</version>
+            <version>${mybatis-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
@@ -46,7 +44,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.22</version>
+            <version>${druid.version}</version>
         </dependency>
 
         <dependency>

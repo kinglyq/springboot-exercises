@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * 信息编码转换
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 public class InformationCodingUtils {
 

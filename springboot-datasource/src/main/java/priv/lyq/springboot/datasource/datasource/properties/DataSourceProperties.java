@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * DataSource详细属性配置
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Getter
 @Setter

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * datasource、sqlSessionFactory
  *
- * @author Yuqing Li
+ * @author Li Yuqing
  */
 @Slf4j
 @Configuration

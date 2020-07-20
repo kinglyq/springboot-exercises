@@ -2,7 +2,7 @@
 <!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="priv.lyq.springboot.datasource.mapper.MultipleTestMapper">
 
-    <select id="selectMultipleTest" resultType="multipleTest">
+    <select id="selectMultipleTest" resultType="priv.lyq.springboot.datasource.entity.MultipleTest">
         SELECT *
         FROM multiple_test
     </select>
