@@ -8,11 +8,15 @@
 
 # modules
 每个项目都是相互独立的，目前来讲
-1. [springboot-security](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-security "springboot-security")
-> 关于spring security的项目，融合了JWT
 
-2. [springboot-multiple-datasource](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-multiple-datasource "springboot-multiple-datasource")
+## [springboot-security](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-security "springboot-security")
+> 关于spring security的项目，使用JWT
+
+## [springboot-datasource](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-multiple-datasource "springboot-multiple-datasource")
 > 多数据源的切换，包括了Mybatis
 
-3. [springboot-simpleweb](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-simpleweb "springboot-simpleweb")
-> 简单的web练习
+## [springboot-web](https://github.com.cnpmjs.org/kinglyq/springboot-exercises/tree/master/springboot-simpleweb "springboot-simpleweb")
+> 简单的web练习，可能以后内容会越来越多，web的范围太广了
+
+## springboot-common
+> 基础通用代码，例如接口返回什么的

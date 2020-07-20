@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>priv.lyq</groupId>
+    <groupId>priv.lyq.spring</groupId>
     <artifactId>springboot-exercises</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
-    <description>聚合项目 关于spring/springboot框架中功能的练习</description>
+    <description>关于spring/springboot框架中功能的练习</description>
 
     <!-- 继承说明：这里继承SpringBoot提供的父工程 -->
     <parent>
@@ -21,17 +21,24 @@
     <!-- 在properties中统一控制依赖包的版本，更清晰-->
     <properties>
         <java.version>1.8</java.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <druid.version>1.1.22</druid.version>
+        <jackson.version>2.11.0</jackson.version>
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <springboot-common.version>1.0.0</springboot-common.version>
+        <spring-security-jwt.version>1.1.0.RELEASE</spring-security-jwt.version>
+        <mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
     </properties>
 
     <modules>
         <module>springboot-security</module>
         <module>springboot-datasource</module>
         <module>springboot-web</module>
+        <module>springboot-common</module>
     </modules>
 
     <!--在此处统一加，子项目pom就可以不用引入了-->
     <dependencies>
-
         <!--
             防止使用idea运行测试时提示错误
             Failed to resolve org.junit.platform:junit-platform-launcher
@@ -56,19 +63,30 @@
             <optional>true</optional>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.68</version>
-        </dependency>-->
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.10</version>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 引入common -->
+            <dependency>
+                <groupId>priv.lyq.spring</groupId>
+                <artifactId>springboot-common</artifactId>
+                <version>${springboot-common.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
