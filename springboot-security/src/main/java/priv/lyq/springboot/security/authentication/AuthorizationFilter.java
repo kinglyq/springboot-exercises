@@ -1,9 +1,7 @@
-package priv.lyq.springboot.security.filter;
+package priv.lyq.springboot.security.authentication;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import priv.lyq.springboot.common.response.ResponseResult;
 import priv.lyq.springboot.common.response.ResponseStatus;
+import priv.lyq.springboot.common.response.ResponseWriter;
 import priv.lyq.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
@@ -25,17 +24,16 @@ import java.util.Collection;
  * 登录成功后 走此类进行鉴权操作
  *
  * @author Li Yuqing
+ * @date 2020-05-24 08:50:00
  */
-public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+public class AuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
+    public AuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER.toLowerCase());
         // 若请求头中没有Authorization或是不以Bearer 开头 则直接放行
         if (token == null || !token.startsWith(JwtTokenUtil.TOKEN_PREFIX)) {
@@ -45,18 +43,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // 去掉前缀 获取Token字符串
         token = token.replace(JwtTokenUtil.TOKEN_PREFIX, "");
         Claims claims = JwtTokenUtil.checkToken(token);
-        final ObjectMapper objectMapper = new ObjectMapper();
         ResponseStatus resp;
         // token解析错误
         if (null == claims) {
             resp = ResponseStatus.TOKEN_PARSING_ERROR;
-            response.getWriter().write(objectMapper.writeValueAsString(ResponseResult.error(resp)));
+            ResponseWriter.writerJson(response, ResponseResult.error(resp));
             return;
         }
         // token过期
         if (JwtTokenUtil.isExpiration(token)) {
             resp = ResponseStatus.TOKEN_EXPIRED;
-            response.getWriter().write(objectMapper.writeValueAsString(ResponseResult.error(resp)));
+            ResponseWriter.writerJson(response, ResponseResult.error(resp));
             return;
         }
         // 从token中解密获取用户名

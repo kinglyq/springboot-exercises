@@ -1,14 +1,13 @@
-package priv.lyq.springboot.security.filter;
+package priv.lyq.springboot.security.authentication;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import priv.lyq.springboot.common.response.ResponseResult;
 import priv.lyq.springboot.common.response.ResponseStatus;
+import priv.lyq.springboot.common.response.ResponseWriter;
 import priv.lyq.springboot.security.entity.Role;
 import priv.lyq.springboot.security.entity.User;
 import priv.lyq.springboot.security.util.JwtTokenUtil;
@@ -24,13 +23,14 @@ import java.util.List;
  * 登录拦截器
  *
  * @author Li Yuqing
+ * @date 2020-05-24 08:33:00
  */
 @Slf4j
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         super.setFilterProcessesUrl("/login");
     }
@@ -49,12 +49,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             roles[i] = authorities.get(i).getAuthority();
         }
         String token = JwtTokenUtil.createToken(user.getId(), Arrays.toString(roles));
-        // 设置编码和请求头
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         // 设置token
         response.setHeader("token", JwtTokenUtil.TOKEN_PREFIX + token);
-        response.getWriter().write(new ObjectMapper().writeValueAsString(ResponseResult.success()));
+        // 返回json
+        ResponseWriter.writerJson(response, ResponseResult.success());
     }
 
     @Override
@@ -88,9 +86,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         else {
             resp = ResponseStatus.INTERNAL_SERVER_ERROR;
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         // 将反馈通过HttpServletResponse中返回给前台
-        response.getWriter().write(new ObjectMapper().writeValueAsString(resp));
+        ResponseWriter.writerJson(response, ResponseResult.error(resp));
     }
 }
