@@ -3,6 +3,7 @@ server:
   servlet:
     session:
       timeout: 1h
+    context-path: /db
 
 spring:
   servlet:
