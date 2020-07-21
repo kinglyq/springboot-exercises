@@ -11,18 +11,19 @@ import java.util.Map;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-24 14:11:00
  */
 @RestController
 public class UserController {
 
     @GetMapping("data")
     @PreAuthorize("hasAuthority('admin')")
-    public ResponseResult data(){
+    public ResponseResult data() {
         return ResponseResult.success("can");
     }
 
     @PostMapping("data2")
-    public ResponseResult data2(@RequestBody Map<String, String> map){
+    public ResponseResult data2(@RequestBody Map<String, String> map) {
         return ResponseResult.success("can");
     }
 

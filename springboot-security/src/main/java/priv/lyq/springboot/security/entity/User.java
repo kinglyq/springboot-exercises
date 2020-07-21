@@ -2,13 +2,18 @@ package priv.lyq.springboot.security.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 /**
+ * 用户信息
+ *
  * @author Yuqing Li
+ * @date 2020-05-24 10:24:00
  */
+@ToString
 public class User implements UserDetails {
 
     @Getter
@@ -23,10 +28,6 @@ public class User implements UserDetails {
 
     @Setter
     private List<Role> authorities;
-
-    @Getter
-    @Setter
-    private List<Page> pages;
 
     @Override
     public List<Role> getAuthorities() {
