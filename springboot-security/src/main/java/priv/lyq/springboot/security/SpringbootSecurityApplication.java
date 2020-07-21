@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-24 08:17:00
  */
 @SpringBootApplication
 @MapperScan("priv.lyq.springboot.security.mapper")

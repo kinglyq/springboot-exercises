@@ -9,7 +9,10 @@ import org.springframework.util.Assert;
 import java.util.Date;
 
 /**
+ * TOKEN工具类
+ *
  * @author Li Yuqing
+ * @date 2020-05-24 09:30:00
  */
 @Slf4j
 public class JwtTokenUtil {
@@ -99,5 +102,8 @@ public class JwtTokenUtil {
         Claims claims = checkToken(token);
         Assert.notNull(claims, TOKEN_PARSING_ERROR);
         return claims.getExpiration().before(new Date());
+    }
+
+    private JwtTokenUtil() {
     }
 }
