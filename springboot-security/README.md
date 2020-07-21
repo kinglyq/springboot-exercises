@@ -1,4 +1,6 @@
-# Spring security, 融合了JWT
+# Spring security, 使用JWT
+
+使用内置h2作为数据库，由于重点在于security，所以表的设计尽可能简单，能拿到数据就行
 
 ## 值得注意的几个地方
 
@@ -8,7 +10,22 @@
 
 2. hasAuthority()/hasAnyAuthority()
 
-第一个方法会在角色字符串中插入字符串 *ROLE_*，所以如果数据库中存储的角色名没有以 *ROLE_* 开头的话，假如说某个用户角色是 **admin**，某个接口赋予的角色也是**admin**即hasRole("admin")，你会发现角色名命名都一样但响应却一直是*403 Forbidden*， 所以。
+第一个方法会在角色字符串中插入字符串 *ROLE_*，如果数据库中存储的角色名没有以 *ROLE_* 开头的话，也就是两者不一致，会一直显示403没有权限，所以采用第二种方式更好一点
+
+### 密码加密
+
+| 加密方式 | 算法                          |
+| :------- | :---------------------------- |
+| noop     | 明文                          |
+| bcrypt   | 单向Hash                      |
+| pbkdf2   | 将salted hash进行多次重复计算 |
+| scrypt   | 内存依赖型的POW算法           |
+| sha256   | 散列                          |
+
+基于从数据库查出来的密码，Spring Security使用格式 "*{上述加密方式}password*"，无论是把这个加密方式前缀存到数据库还是使用 *CONCAT*函数拼接，反正是得有的，否则就是
+```java
+java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id "null"
+```
 
 ### 几个问题
 
@@ -18,7 +35,6 @@
 
 ### 疑问: :question:
 1. 方法/接口级别的管控是不是每一个接口都有一个唯一的名字/id（写到```@PreAuthorize("hasAuthority('xxx')")```这种），根据用户角色拥有接口名字来进行访问控制
-
 
 # 参考
 1. [Spring Security 无法登陆，报错：There is no PasswordEncoder mapped for the id “null”](https://blog.csdn.net/canon_in_d_major/article/details/79675033)
