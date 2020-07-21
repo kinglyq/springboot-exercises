@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Li Yuqing
- * @date 2020/7/20 下午 06:01
+ * @date 2020-07-20 16:17:00
  */
 @SpringBootApplication
 public class SpringbootCommonApplication {

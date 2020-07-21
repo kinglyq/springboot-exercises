@@ -5,12 +5,14 @@ package priv.lyq.springboot.common.response;
  * <ul>
  *     <li>200 成功</li>
  *     <li>4xx 客户端错误</li>
- *     <li>500 服务器端错误</li>
- *     <li>6xx 自定义状态</li>
+ *     <li>500 服务器端<strong>未知</strong>错误</li>
+ *     <li>5xx 可以确定的服务器端错误</li>
+ *     <li>6xx 用户相关（登录、账号问题等）</li>
+ *     <li>7xx Token相关</li>
  * </ul>
  *
  * @author Li Yuqing
- * @date 2020/7/20 下午 03:36
+ * @date 2020-07-20 16:50:00
  */
 public enum ResponseStatus {
 
@@ -20,7 +22,7 @@ public enum ResponseStatus {
     OK(200, "OK"),
 
     /**
-     * 请求出现语法错误
+     * 请求出现语法错误或参数校验不通过
      */
     BAD_REQUEST(400, "Bad Request"),
 
@@ -51,7 +53,10 @@ public enum ResponseStatus {
 
     /**
      * 用户未登录
+     *
+     * @deprecated 使用@{{@link #UNAUTHORIZED}}代替
      */
+    @Deprecated
     USER_IS_NOT_LOGGED_IN(600, "用户未登录"),
 
     /**
@@ -65,14 +70,14 @@ public enum ResponseStatus {
     WRONG_PASSWORD(602, "密码错误"),
 
     /**
-     * token过期
+     * 账号被锁定
      */
-    TOKEN_EXPIRED(603, "token过期"),
+    ACCOUNT_LOCKED(603, "账号被锁定"),
 
     /**
-     * token解析错误
+     * 密码过期
      */
-    TOKEN_PARSING_ERROR(604, "token解析错误"),
+    PASSWORD_EXPIRED(604, "密码过期"),
 
     /**
      * 账号过期
@@ -80,19 +85,19 @@ public enum ResponseStatus {
     ACCOUNT_EXPIRED(605, "账号过期"),
 
     /**
-     * 密码过期
-     */
-    PASSWORD_EXPIRED(606, "密码过期"),
-
-    /**
      * 账号不可用
      */
-    ACCOUNT_UNAVAILABLE(607, "账号不可用"),
+    ACCOUNT_UNAVAILABLE(606, "账号不可用"),
 
     /**
-     * 账号被锁定
+     * token过期
      */
-    ACCOUNT_LOCKED(608, "账号被锁定");
+    TOKEN_EXPIRED(700, "token过期"),
+
+    /**
+     * token解析错误
+     */
+    TOKEN_PARSING_ERROR(701, "token解析错误");
 
     /**
      * 状态码

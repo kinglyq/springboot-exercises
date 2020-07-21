@@ -6,7 +6,7 @@ import java.util.HashMap;
  * 接口数据响应类
  *
  * @author Li Yuqing
- * @date 2020/7/20 下午 03:31
+ * @date 2020-07-20 17:00:00
  */
 public class ResponseResult extends HashMap<String, Object> {
 
