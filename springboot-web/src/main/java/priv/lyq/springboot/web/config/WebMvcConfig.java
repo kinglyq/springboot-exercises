@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-26 13:48:00
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {

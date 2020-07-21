@@ -6,13 +6,14 @@ import java.util.List;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-28 09:08:00
  */
 public interface MultipleTestMapper {
 
     /**
      * 查询多条记录
      *
-     * @return List<MultipleTest>
+     * @return List
      * @see MultipleTest
      */
     List<MultipleTest> selectMultipleTest();

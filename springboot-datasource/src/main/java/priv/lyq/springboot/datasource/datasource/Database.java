@@ -4,6 +4,7 @@ package priv.lyq.springboot.datasource.datasource;
  * 数据库唯一标识
  *
  * @author Li Yuqing
+ * @date 2020-05-28 10:05:00
  */
 public enum Database {
 

@@ -9,6 +9,7 @@ import java.util.Random;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-26 11:06:00
  */
 public class VerifyCode {
     /**

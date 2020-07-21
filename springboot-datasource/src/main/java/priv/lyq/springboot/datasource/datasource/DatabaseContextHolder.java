@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
  * 通过线程绑定的事务上下文切换数据源
  *
  * @author Li Yuqing
+ * @date 2020-05-28 10:21:00
  */
 @Slf4j
 public class DatabaseContextHolder {

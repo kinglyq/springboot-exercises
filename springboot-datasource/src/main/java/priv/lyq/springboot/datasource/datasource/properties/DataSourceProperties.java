@@ -7,6 +7,7 @@ import lombok.Setter;
  * DataSource详细属性配置
  *
  * @author Li Yuqing
+ * @date 2020-05-28 10:18:00
  */
 @Getter
 @Setter

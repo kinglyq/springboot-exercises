@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Li Yuqing
+ * @date 2020-05-26 10:42:00
  */
 @SpringBootApplication
 public class SpringbootWebApplication {
