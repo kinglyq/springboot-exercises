@@ -2,6 +2,8 @@ server:
   port: 9701
   servlet:
     context-path: /security
+    session:
+      timeout:
 
 spring:
   datasource:
@@ -13,7 +15,6 @@ spring:
     schema: classpath:db/schema.sql
     data: classpath:db/data.sql
     platform: h2
-
   h2:
     console:
       settings:
@@ -31,6 +32,12 @@ mybatis:
     call-setters-on-nulls: true
     map-underscore-to-camel-case: true
   type-aliases-package: priv.lyq.springboot.security.entity
+
+jwt:
+  token:
+    subject: springboot
+    expiration: 30m
+    appSecretKey: security
 
 logging:
   level: {priv.lyq.springboot.security.mapper: debug}
