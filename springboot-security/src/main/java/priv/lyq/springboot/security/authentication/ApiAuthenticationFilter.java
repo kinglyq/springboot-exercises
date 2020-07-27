@@ -1,7 +1,6 @@
 package priv.lyq.springboot.security.authentication;
 
 import io.jsonwebtoken.Claims;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,9 +25,9 @@ import java.util.Collection;
  * @author Li Yuqing
  * @date 2020-05-24 08:50:00
  */
-public class AuthorizationFilter extends BasicAuthenticationFilter {
+public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager) {
+    public ApiAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -51,17 +50,15 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
         // token过期
-        if (JwtTokenUtil.isExpiration(token)) {
+        if (JwtTokenUtil.isExpired(token)) {
             resp = ResponseStatus.TOKEN_EXPIRED;
             ResponseWriter.writerJson(response, ResponseResult.error(resp));
             return;
         }
         // 从token中解密获取用户名
-        String username = JwtTokenUtil.getTokenBodyValue(token, "username");
+        String username = JwtTokenUtil.getUsername(token);
         // 从token中解密获取用户角色
-        String roleList = JwtTokenUtil.getTokenBodyValue(token, "roles");
-        // 将角色字符串转换为数组
-        String[] roles = StringUtils.strip(roleList, "[]").split(", ");
+        String[] roles = JwtTokenUtil.getRoles(token);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));

@@ -15,8 +15,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import priv.lyq.springboot.security.access.NoLoginAuthenticationEntryPoint;
 import priv.lyq.springboot.security.access.NoPermissionDeniedHandler;
-import priv.lyq.springboot.security.authentication.AuthenticationFilter;
-import priv.lyq.springboot.security.authentication.AuthorizationFilter;
+import priv.lyq.springboot.security.authentication.LoginAuthenticationFilter;
+import priv.lyq.springboot.security.authentication.ApiAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -86,9 +86,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         // .addLogoutHandler()
                 )*/
                 // 添加 JWT 登录拦截器
-                .addFilter(new AuthenticationFilter(authenticationManager()))
+                .addFilter(new LoginAuthenticationFilter(authenticationManager()))
                 // 添加 JWT 鉴权拦截器
-                .addFilter(new AuthorizationFilter(authenticationManager()))
+                .addFilter(new ApiAuthenticationFilter(authenticationManager()))
                 // session相关
                 .sessionManagement(session -> session
                         // 设置Session的创建策略为：Spring Security永不创建HttpSession 不使用HttpSession来获取SecurityContext
