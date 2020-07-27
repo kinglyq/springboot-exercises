@@ -11,16 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 未登录，无访问权限
+ * 未登录访问处理
  *
  * @author Li Yuqing
  * @date 2020-05-24 16:59:00
  */
-public class LoginAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class NoLoginAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        ResponseWriter.writerJson(response, ResponseResult.error(ResponseStatus.UNAUTHORIZED));
+        response.setStatus(401);
+        ResponseWriter.writerJson(response, ResponseResult.error(ResponseStatus.UNAUTHORIZED, "未登录，禁止访问", null));
     }
 
 }

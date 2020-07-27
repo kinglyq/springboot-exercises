@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author Li Yuqing
  * @date 2020-06-27 14:45:00
  */
-public class AuthenticationDeniedHandler implements AccessDeniedHandler {
+public class NoPermissionDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {

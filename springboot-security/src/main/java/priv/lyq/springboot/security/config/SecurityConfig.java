@@ -13,10 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import priv.lyq.springboot.security.access.LoginAuthenticationEntryPoint;
+import priv.lyq.springboot.security.access.NoLoginAuthenticationEntryPoint;
+import priv.lyq.springboot.security.access.NoPermissionDeniedHandler;
 import priv.lyq.springboot.security.authentication.AuthenticationFilter;
 import priv.lyq.springboot.security.authentication.AuthorizationFilter;
-import priv.lyq.springboot.security.access.AuthenticationDeniedHandler;
 
 import javax.annotation.Resource;
 
@@ -99,9 +99,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 异常处理
                 .exceptionHandling()
                 // 匿名用户访问无权限资源时的异常
-                .authenticationEntryPoint(new LoginAuthenticationEntryPoint())
+                .authenticationEntryPoint(new NoLoginAuthenticationEntryPoint())
                 // 鉴权失败处理
-                .accessDeniedHandler(new AuthenticationDeniedHandler())
+                .accessDeniedHandler(new NoPermissionDeniedHandler())
                 .and()
                 .headers(header -> {
                     // 防止打不开h2控制台页面
