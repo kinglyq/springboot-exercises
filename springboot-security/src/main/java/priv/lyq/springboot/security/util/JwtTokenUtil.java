@@ -4,12 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
+import priv.lyq.springboot.security.config.autoconfigure.JwtTokenProperties;
 
 import java.util.Date;
 
 /**
- * TOKEN工具类
+ * token生成、校验...工具类
  *
  * @author Li Yuqing
  * @date 2020-05-24 09:30:00
@@ -28,24 +30,14 @@ public class JwtTokenUtil {
     public static final String TOKEN_PREFIX = "Bearer ";
 
     /**
-     * 签名主题
+     * 用户名声明
      */
-    public static final String SUBJECT = "springboot";
+    private static final String USERNAME = "username";
 
     /**
-     * 过期时间
+     * 角色声明
      */
-    public static final long EXPIRATION = 1000 * 60 * 60 * 24;
-
-    /**
-     * 应用密钥
-     */
-    public static final String APP_SECRET_KEY = "springSecurity";
-
-    /**
-     * 角色权限声明
-     */
-    private static final String ROLE_CLAIMS = "roles";
+    private static final String ROLES = "roles";
 
     /**
      * token解析错误
@@ -53,29 +45,33 @@ public class JwtTokenUtil {
     private static final String TOKEN_PARSING_ERROR = "token解析错误";
 
     /**
-     * 生成Token
+     * 生成token
+     *
+     * @param username 用户名
+     * @param roles    角色
+     * @return token
      */
     public static String createToken(String username, String roles) {
         return Jwts
                 .builder()
-                .setSubject(SUBJECT)
+                .setSubject(JwtTokenProperties.subject)
                 // .setClaims(map)
-                .claim("username", username)
-                .claim(ROLE_CLAIMS, roles)
+                .claim(USERNAME, username)
+                .claim(ROLES, roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(SignatureAlgorithm.HS256, APP_SECRET_KEY).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + JwtTokenProperties.expiration.getSeconds()))
+                .signWith(SignatureAlgorithm.HS256, JwtTokenProperties.appSecretKey).compact();
     }
 
     /**
-     * 校验Token
+     * 校验token
      *
      * @param token token
      * @return token body
      */
     public static Claims checkToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(APP_SECRET_KEY).parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(JwtTokenProperties.appSecretKey).parseClaimsJws(token).getBody();
         } catch (Exception e) {
             log.error(TOKEN_PARSING_ERROR);
             return null;
@@ -83,9 +79,11 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 从Token Body中根据key获取value
+     * 从token Body中根据key获取value
      *
-     * @return string
+     * @param token token
+     * @param key   key
+     * @return value
      */
     public static String getTokenBodyValue(String token, String key) {
         Claims claims = checkToken(token);
@@ -94,11 +92,33 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 校验Token是否过期
+     * 获取用户名
      *
-     * @return boolean
+     * @param token token
+     * @return 用户名
      */
-    public static boolean isExpiration(String token) {
+    public static String getUsername(String token) {
+        return getTokenBodyValue(token, USERNAME);
+    }
+
+    /**
+     * 获取角色
+     *
+     * @param token token
+     * @return 角色数组
+     */
+    public static String[] getRoles(String token) {
+        String listRole = getTokenBodyValue(token, ROLES);
+        return StringUtils.strip(listRole, "[]").split(", ");
+    }
+
+    /**
+     * 校验token是否过期
+     *
+     * @param token token
+     * @return true=过期
+     */
+    public static boolean isExpired(String token) {
         Claims claims = checkToken(token);
         Assert.notNull(claims, TOKEN_PARSING_ERROR);
         return claims.getExpiration().before(new Date());
