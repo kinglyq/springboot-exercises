@@ -1,6 +1,8 @@
 package priv.lyq.springboot.security.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,15 +10,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import priv.lyq.springboot.security.access.NoLoginAuthenticationEntryPoint;
-import priv.lyq.springboot.security.access.NoPermissionDeniedHandler;
-import priv.lyq.springboot.security.authentication.LoginAuthenticationFilter;
-import priv.lyq.springboot.security.authentication.ApiAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -33,6 +30,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource(name = "userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
+    /**
+     * 设置角色大小层级关系
+     *
+     * @return RoleHierarchy
+     * @see RoleHierarchyImpl
+     */
+    @Bean
+    protected RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        roleHierarchy.setHierarchy("admin > normal");
+        return roleHierarchy;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -48,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/assets/**");
+        web.ignoring().antMatchers("/assets/**", "/login.html");
     }
 
     /**
@@ -61,13 +71,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/login", "/open/**", "/h2/**"
         };
         http
-                // 登录页面相关
-                /* .formLogin(formLogin -> formLogin
-                         .loginProcessingUrl("/login.html")
-                         .usernameParameter("username")
-                         .passwordParameter("password")
-                         .permitAll()
-                 )*/
+                // 前后端不分离
+                // 使用表单直接登录（登录接口默认页面地址）
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login.html")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .permitAll()
+                        .defaultSuccessUrl("/index.html")
+                )
+                // 登出相关
+                .logout(logout -> logout
+                                // 登出接口
+                                .logoutUrl("/logout")
+                                // .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "post"))
+                                .deleteCookies()
+                                .permitAll()
+                        // .addLogoutHandler()
+                )
                 // 权限设置相关
                 .authorizeRequests(authorize -> authorize
                                 // authorTest 接口需要 admin_test 角色
@@ -79,29 +101,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         // 所有请求可访问
                         // .anyRequest().permitAll()
                 )
-                // 登出相关
-                /*.logout(logout -> logout
-                                // 登出接口
-                                .logoutUrl("/logout")
-                        // .addLogoutHandler()
-                )*/
-                // 添加 JWT 登录拦截器
-                .addFilter(new LoginAuthenticationFilter(authenticationManager()))
-                // 添加 JWT 鉴权拦截器
-                .addFilter(new ApiAuthenticationFilter(authenticationManager()))
                 // session相关
-                .sessionManagement(session -> session
+                /*.sessionManagement(session -> session
                         // 设置Session的创建策略为：Spring Security永不创建HttpSession 不使用HttpSession来获取SecurityContext
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                )*/
+                // 添加 JWT 登录拦截器
+                // .addFilter(new LoginAuthenticationFilter(authenticationManager()))
+                // 添加 JWT 鉴权拦截器
+                // .addFilter(new ApiAuthenticationFilter(authenticationManager()))
                 // CSRF请求限制无效
                 .csrf(AbstractHttpConfigurer::disable)
                 // 异常处理
                 .exceptionHandling()
                 // 匿名用户访问无权限资源时的异常
-                .authenticationEntryPoint(new NoLoginAuthenticationEntryPoint())
+                // .authenticationEntryPoint(new NoLoginAuthenticationEntryPoint())
                 // 鉴权失败处理
-                .accessDeniedHandler(new NoPermissionDeniedHandler())
+                // .accessDeniedHandler(new NoPermissionDeniedHandler())
                 .and()
                 .headers(header -> {
                     // 防止打不开h2控制台页面
