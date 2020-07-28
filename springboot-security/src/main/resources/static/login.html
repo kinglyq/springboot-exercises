@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <script src="./assets/jquery-3.4.1.min.js"></script>
+    <script src="./assets/jquery.cookie-1.4.1.min.js"></script>
+    <script src="./assets/jquery.ajaxSettings.js"></script>
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        fieldset {
+            margin: 0 auto;
+            width: 245px;
+        }
+
+        .login {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <fieldset>
+            <legend>登录</legend>
+            <!--<form action="#" method="post" id="login-form">-->
+            <form action="/security/login" method="post">
+                <table>
+                    <tr>
+                        <td>用户名</td>
+                        <td>
+                            <label> 
+                                <input type="text" name="username" value="oaa">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                        <td>
+                            <label>
+                                <input type="password" name="password" value="0000">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="login">
+                            <input type="button" value="Ajax登录" id="login">
+                            <input type="submit" value="表单登录">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </fieldset>
+    </div>
+
+    <script>
+
+        function login() {
+            let values = $("#login-form").serialize();
+            $.ajax("/login", {
+                type: "post",
+                data: values
+            }).done(function (data, _textStatus, xhr) {
+                if (data.code !== 0) {
+                    alert(data.msg);
+                    $.cookie("token", xhr.getResponseHeader("Token"));
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            })
+        }
+
+        // document.getElementById("login").addEventListener("click", login);
+    </script>
+</body>
+
+</html>
