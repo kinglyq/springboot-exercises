@@ -1,10 +1,10 @@
 package priv.lyq.springboot.security.controller;
 
+import com.github.kinglyq.common.http.response.Result;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import priv.lyq.springboot.common.response.ResponseResult;
 
 /**
  * 权限测试接口
@@ -18,14 +18,14 @@ public class RoleTestController {
 
     @GetMapping("admin")
     @PreAuthorize("hasAuthority('admin')")
-    public ResponseResult admin(){
-        return ResponseResult.success("admin");
+    public Result admin(){
+        return Result.success("admin");
     }
 
     @GetMapping("normal")
     @PreAuthorize("hasAuthority('normal')")
-    public ResponseResult normal(){
-        return ResponseResult.success("normal");
+    public Result normal(){
+        return Result.success("normal");
     }
 
 }

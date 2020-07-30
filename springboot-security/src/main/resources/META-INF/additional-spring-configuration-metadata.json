@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "jwt.token.subject",
+      "type": "java.lang.String",
+      "description": "主题."
+    },
+    {
+      "name": "jwt.token.expiration",
+      "type": "java.lang.String",
+      "description": "有效期，可用单位：<ul><li>ns 纳秒</li><li>us 微秒</li><li>ms 毫秒</li><li>s 秒</li><li>m 分</li><li>h 时</li><li>d 天</li></ul>."
+    },
+    {
+      "name": "jwt.token.appSecretKey",
+      "type": "java.lang.String",
+      "description": "密钥."
+    }
+  ] }

@@ -1,10 +1,10 @@
 package priv.lyq.springboot.security.access;
 
+import com.github.kinglyq.common.http.HttpStatus;
+import com.github.kinglyq.common.http.response.ResponseWriter;
+import com.github.kinglyq.common.http.response.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import priv.lyq.springboot.common.response.ResponseResult;
-import priv.lyq.springboot.common.response.ResponseStatus;
-import priv.lyq.springboot.common.response.ResponseWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,8 @@ public class NoLoginAuthenticationEntryPoint implements AuthenticationEntryPoint
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
         response.setStatus(401);
-        ResponseWriter.writerJson(response, ResponseResult.error(ResponseStatus.UNAUTHORIZED, "未登录，禁止访问", null));
+        ResponseWriter.writerJson(response, Result.error(HttpStatus.UNAUTHORIZED, "未登录，禁止访问", null));
+
     }
 
 }

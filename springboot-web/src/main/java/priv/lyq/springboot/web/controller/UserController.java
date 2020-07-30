@@ -1,9 +1,9 @@
 package priv.lyq.springboot.web.controller;
 
+import com.github.kinglyq.common.http.response.Result;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import priv.lyq.springboot.common.response.ResponseResult;
 
 /**
  * @author Li Yuqing
@@ -14,8 +14,8 @@ import priv.lyq.springboot.common.response.ResponseResult;
 public class UserController {
 
     @RequestMapping("login")
-    public ResponseResult login(){
-        return ResponseResult.success();
+    public Result login(){
+        return Result.success();
     }
 
 }

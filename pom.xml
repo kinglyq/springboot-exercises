@@ -76,17 +76,6 @@
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- 引入common -->
-            <!--<dependency>
-                <groupId>priv.lyq.spring</groupId>
-                <artifactId>springboot-common</artifactId>
-                <version>${springboot-common.version}</version>
-            </dependency>-->
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
 

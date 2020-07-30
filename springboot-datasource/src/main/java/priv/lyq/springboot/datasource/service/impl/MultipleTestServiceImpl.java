@@ -32,7 +32,7 @@ public class MultipleTestServiceImpl implements MultipleTestService {
     @Transactional(rollbackFor = Exception.class)
     public int insertMultipleTest(MultipleTest multipleTest) {
         int i = multipleTestMapper.insertMultipleTest(multipleTest);
-        int r = 1 / 0;
+        // int r = 1 / 0;
         return i;
     }
 }

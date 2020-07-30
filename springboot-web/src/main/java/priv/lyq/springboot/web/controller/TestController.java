@@ -1,9 +1,9 @@
 package priv.lyq.springboot.web.controller;
 
+import com.github.kinglyq.common.http.response.Result;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import priv.lyq.springboot.common.response.ResponseResult;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 public class TestController {
 
     @RequestMapping("req-path")
-    public ResponseResult path(HttpServletRequest request){
-        return ResponseResult.success(request.getContextPath());
+    public Result path(HttpServletRequest request){
+        return Result.success(request.getContextPath());
     }
 
 }
