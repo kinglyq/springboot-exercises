@@ -5,34 +5,44 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>priv.lyq.spring</groupId>
-        <artifactId>springboot-exercises</artifactId>
-        <version>1.0.0</version>
-        <relativePath/>
-    </parent>
-
-    <artifactId>springboot-common</artifactId>
+    <!-- 慢慢变成com.github.kinglyq的包名 -->
+    <groupId>com.github.kinglyq</groupId>
+    <artifactId>common</artifactId>
     <version>1.0.0</version>
-    <name>springboot-common</name>
-    <description>springboot-common</description>
+    <name>common</name>
+    <description>一些通用代码</description>
+
+    <!-- pom.xml -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 文件拷贝时的编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 编译时的编码 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.0</version>
         </dependency>
 
     </dependencies>

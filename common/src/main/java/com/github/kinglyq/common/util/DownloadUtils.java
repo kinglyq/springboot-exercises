@@ -1,4 +1,4 @@
-package priv.lyq.springboot.common.util;
+package com.github.kinglyq.common.util;
 
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +18,7 @@ public class DownloadUtils {
      * @param fileName 文件名
      * @param length   文件大小
      */
-    public static void setDownloadHeader(HttpServletResponse response, String fileName, long length) {
+    public static void setHeader(HttpServletResponse response, String fileName, long length) {
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);

@@ -1,4 +1,4 @@
-package priv.lyq.springboot.common.response;
+package com.github.kinglyq.common.http;
 
 /**
  * 接口响应码与描述，参照HttpStatus
@@ -12,9 +12,9 @@ package priv.lyq.springboot.common.response;
  * </ul>
  *
  * @author Li Yuqing
- * @date 2020-07-20 16:50:00
+ * @date 2020-07-30 15:31:14
  */
-public enum ResponseStatus {
+public enum HttpStatus {
 
     /**
      * 成功
@@ -109,8 +109,9 @@ public enum ResponseStatus {
      */
     public final String reasonPhrase;
 
-    ResponseStatus(int code, String reasonPhrase) {
+    HttpStatus(int code, String reasonPhrase) {
         this.code = code;
         this.reasonPhrase = reasonPhrase;
     }
+
 }
