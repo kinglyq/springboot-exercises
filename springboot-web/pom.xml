@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>priv.lyq.spring</groupId>
+        <groupId>top.funsite</groupId>
         <artifactId>springboot-exercises</artifactId>
         <version>0.0.1</version>
         <relativePath/>

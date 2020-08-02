@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="priv.lyq.springboot.security.mapper.UserMapper">
+<mapper namespace="top.funsite.springboot.security.mapper.UserMapper">
 
-    <resultMap id="user" type="priv.lyq.springboot.security.entity.User">
+    <resultMap id="user" type="top.funsite.springboot.security.entity.User">
         <id property="id" column="USER_ID"/>
         <result property="username" column="USERNAME"/>
         <result property="password" column="PASSWORD"/>
-        <collection property="authorities" ofType="priv.lyq.springboot.security.entity.Role">
+        <collection property="authorities" ofType="top.funsite.springboot.security.entity.Role">
             <id property="id" column="ROLE_ID"/>
             <result property="roleName" column="ROLE_NAME"/>
             <result property="roleDesc" column="ROLE_DESC"/>
