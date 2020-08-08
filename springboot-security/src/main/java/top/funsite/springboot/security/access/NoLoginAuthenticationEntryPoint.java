@@ -22,7 +22,6 @@ public class NoLoginAuthenticationEntryPoint implements AuthenticationEntryPoint
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
         response.setStatus(401);
         ResponseWriter.writerJson(response, Result.error(HttpStatus.UNAUTHORIZED, "未登录，禁止访问", null));
-
     }
 
 }
