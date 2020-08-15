@@ -1,14 +1,14 @@
 package top.funsite.springboot.security.authentication;
 
-import com.github.kinglyq.common.http.HttpStatus;
-import com.github.kinglyq.common.http.response.ResponseWriter;
-import com.github.kinglyq.common.http.response.Result;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import top.funsite.springboot.security.http.response.ResponseStatus;
+import top.funsite.springboot.security.http.response.ResponseWriter;
+import top.funsite.springboot.security.http.response.Result;
 import top.funsite.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
@@ -42,17 +42,17 @@ public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
         // 去掉前缀 获取Token字符串
         token = token.replace(JwtTokenUtil.TOKEN_PREFIX, "");
         Claims claims = JwtTokenUtil.checkToken(token);
-        HttpStatus resp;
+        ResponseStatus status;
         // token解析错误
         if (null == claims) {
-            resp = HttpStatus.TOKEN_PARSING_ERROR;
-            ResponseWriter.writerJson(response, Result.error(resp));
+            status = ResponseStatus.TOKEN_PARSING_ERROR;
+            ResponseWriter.writerJson(response, Result.error(status, null));
             return;
         }
         // token过期
         if (JwtTokenUtil.isExpired(token)) {
-            resp = HttpStatus.TOKEN_EXPIRED;
-            ResponseWriter.writerJson(response, Result.error(resp));
+            status = ResponseStatus.TOKEN_EXPIRED;
+            ResponseWriter.writerJson(response, Result.error(status, null));
             return;
         }
         // 从token中解密获取用户名

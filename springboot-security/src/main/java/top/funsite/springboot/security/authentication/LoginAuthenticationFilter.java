@@ -1,8 +1,5 @@
 package top.funsite.springboot.security.authentication;
 
-import com.github.kinglyq.common.http.HttpStatus;
-import com.github.kinglyq.common.http.response.ResponseWriter;
-import com.github.kinglyq.common.http.response.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -10,6 +7,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import top.funsite.springboot.security.entity.Role;
 import top.funsite.springboot.security.entity.User;
+import top.funsite.springboot.security.http.response.ResponseStatus;
+import top.funsite.springboot.security.http.response.ResponseWriter;
+import top.funsite.springboot.security.http.response.Result;
 import top.funsite.springboot.security.util.JwtTokenUtil;
 
 import javax.servlet.FilterChain;
@@ -57,36 +57,36 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
-        HttpStatus resp;
+        ResponseStatus status;
         // 账号过期
         if (failed instanceof AccountExpiredException) {
-            resp = HttpStatus.ACCOUNT_EXPIRED;
+            status = ResponseStatus.ACCOUNT_EXPIRED;
         }
         // 密码错误
         else if (failed instanceof BadCredentialsException) {
-            resp = HttpStatus.WRONG_PASSWORD;
+            status = ResponseStatus.WRONG_PASSWORD;
         }
         // 密码过期
         else if (failed instanceof CredentialsExpiredException) {
-            resp = HttpStatus.PASSWORD_EXPIRED;
+            status = ResponseStatus.PASSWORD_EXPIRED;
         }
         // 账号不可用
         else if (failed instanceof DisabledException) {
-            resp = HttpStatus.ACCOUNT_UNAVAILABLE;
+            status = ResponseStatus.ACCOUNT_UNAVAILABLE;
         }
         // 账号锁定
         else if (failed instanceof LockedException) {
-            resp = HttpStatus.ACCOUNT_LOCKED;
+            status = ResponseStatus.ACCOUNT_LOCKED;
         }
         // 用户不存在
         else if (failed instanceof InternalAuthenticationServiceException) {
-            resp = HttpStatus.USER_NOT_FOUND;
+            status = ResponseStatus.USER_NOT_FOUND;
         }
         // 其他错误
         else {
-            resp = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = ResponseStatus.INTERNAL_SERVER_ERROR;
         }
         // 将反馈通过HttpServletResponse中返回给前台
-        ResponseWriter.writerJson(response, Result.error(resp));
+        ResponseWriter.writerJson(response, Result.error(status, null));
     }
 }

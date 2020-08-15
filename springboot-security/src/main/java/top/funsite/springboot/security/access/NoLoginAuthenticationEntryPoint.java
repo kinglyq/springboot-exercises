@@ -1,10 +1,10 @@
 package top.funsite.springboot.security.access;
 
-import com.github.kinglyq.common.http.HttpStatus;
-import com.github.kinglyq.common.http.response.ResponseWriter;
-import com.github.kinglyq.common.http.response.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import top.funsite.springboot.security.http.response.ResponseStatus;
+import top.funsite.springboot.security.http.response.ResponseWriter;
+import top.funsite.springboot.security.http.response.Result;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +20,7 @@ public class NoLoginAuthenticationEntryPoint implements AuthenticationEntryPoint
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        response.setStatus(401);
-        ResponseWriter.writerJson(response, Result.error(HttpStatus.UNAUTHORIZED, "未登录，禁止访问", null));
+        ResponseWriter.writerJson(response, Result.error(ResponseStatus.UNAUTHORIZED, null));
     }
 
 }

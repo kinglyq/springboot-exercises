@@ -1,10 +1,10 @@
 package top.funsite.springboot.security.controller;
 
-import com.github.kinglyq.common.http.response.Result;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import top.funsite.springboot.security.http.response.Result;
 
 /**
  * 权限测试接口
