@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan({
-        "priv.lyq.springboot.datasource.mapper"
+        "top.funsite.springboot.datasource.mapper"
 })
 public class SpringbootDatasourceApplication {
     public static void main(String[] args) {
