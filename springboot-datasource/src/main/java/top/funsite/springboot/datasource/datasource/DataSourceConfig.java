@@ -51,8 +51,9 @@ public class DataSourceConfig {
             targetDataSources.put(db, dataSource);
         }
         // 设置默认数据源
-        routing.setDefaultTargetDataSource(targetDataSources.get(this.config.getDefaultDb()));
-        log.info("默认数据源: {}", defaultDataSource);
+        Database defaultDb = this.config.getDefaultDb();
+        routing.setDefaultTargetDataSource(targetDataSources.get(defaultDb));
+        log.info("默认数据源: {}", defaultDb.name());
         // set
         routing.setTargetDataSources(targetDataSources);
         return routing;
