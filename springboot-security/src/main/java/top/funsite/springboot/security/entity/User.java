@@ -1,5 +1,6 @@
 package top.funsite.springboot.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2020-05-24 10:24:00
  */
 @ToString
+@JsonIgnoreProperties(value = {"password", "authorities"})
 public class User implements UserDetails {
 
     @Getter
