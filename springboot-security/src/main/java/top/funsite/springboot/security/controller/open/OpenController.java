@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 
 /**
@@ -23,10 +24,11 @@ public class OpenController {
     private DefaultKaptcha kaptcha;
 
     @GetMapping(path = "code", produces = MediaType.IMAGE_JPEG_VALUE)
-    public BufferedImage o1() {
-        String text = kaptcha.createText();
-        log.info("验证码：{}", text);
-        return kaptcha.createImage(text);
+    public BufferedImage o1(HttpServletResponse response) {
+        String code = kaptcha.createText();
+        response.setHeader("Code", code);
+        log.info("验证码：{}", code);
+        return kaptcha.createImage(code);
     }
 
 }
