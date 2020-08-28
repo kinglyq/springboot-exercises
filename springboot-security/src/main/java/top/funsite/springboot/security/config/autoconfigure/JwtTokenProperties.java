@@ -2,18 +2,16 @@ package top.funsite.springboot.security.config.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
 
 import java.time.Duration;
 
 
 /**
- * token配置属性
+ * token字符串生成属性配置
  *
  * @author Li Yuqing
  * @date 2020-07-27 11:34:16
  */
-@Validated
 @Configuration
 @ConfigurationProperties(prefix = "jwt.token")
 public class JwtTokenProperties {

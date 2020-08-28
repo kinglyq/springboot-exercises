@@ -13,7 +13,7 @@
         </collection>
     </resultMap>
 
-    <!--  加密方式得是小写滴  -->
+    <!--  加密方式要小写  -->
     <select id="selectUserByName" resultMap="user">
         SELECT U.ID AS USER_ID,
                U.USERNAME,
