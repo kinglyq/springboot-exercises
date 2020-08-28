@@ -68,7 +68,6 @@
                 data: values
             }).done(function (data, _textStatus, xhr) {
                 if (data.code !== 0) {
-                    alert(data.msg);
                     $.cookie("token", xhr.getResponseHeader("Token"));
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {

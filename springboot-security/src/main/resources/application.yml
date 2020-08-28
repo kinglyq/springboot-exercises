@@ -3,7 +3,7 @@ server:
   servlet:
     context-path: /security
     session:
-      timeout:
+      timeout: 30m
 
 spring:
   datasource:
@@ -31,7 +31,7 @@ mybatis:
   configuration:
     call-setters-on-nulls: true
     map-underscore-to-camel-case: true
-  type-aliases-package: priv.lyq.springboot.security.entity
+  type-aliases-package: top.funsite.springboot.security.entity
 
 jwt:
   token:
@@ -40,4 +40,4 @@ jwt:
     appSecretKey: security
 
 logging:
-  level: {priv.lyq.springboot.security.mapper: debug}
+  level: {top.funsite.springboot.security.mapper: debug}
