@@ -11,7 +11,7 @@ import top.funsite.springboot.security.config.autoconfigure.JwtTokenProperties;
 import java.util.Date;
 
 /**
- * token生成、校验...工具类
+ * token生成、校验
  *
  * @author Li Yuqing
  * @date 2020-05-24 09:30:00

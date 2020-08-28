@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Param;
 import top.funsite.springboot.security.entity.User;
 
 /**
+ * 用户DAO层
+ *
  * @author Li Yuqing
  * @date 2020-05-24 10:55:00
  */
