@@ -32,7 +32,8 @@ public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws
+            IOException, ServletException {
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER.toLowerCase());
         // 若请求头中没有Authorization或是不以Bearer 开头 则直接放行
         if (token == null || !token.startsWith(JwtTokenUtil.TOKEN_PREFIX)) {
@@ -64,7 +65,8 @@ public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
             authorities.add(new SimpleGrantedAuthority(role));
         }
         if (null != username) {
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,
+                    null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             super.doFilterInternal(request, response, chain);
         }

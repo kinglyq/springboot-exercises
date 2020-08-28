@@ -32,7 +32,8 @@ public class KaptchaConfig {
         properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, "Arial");
         properties.setProperty(Constants.KAPTCHA_NOISE_COLOR, "164,128,55");
         properties.setProperty(Constants.KAPTCHA_OBSCURIFICATOR_IMPL, "com.google.code.kaptcha.impl.ShadowGimpy");
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_STRING, "023456789abcdefghjkmnpqrstwxyzABCDEFGHJKMNPQRSTWXYZ");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_STRING,
+                "023456789abcdefghjkmnpqrstwxyzABCDEFGHJKMNPQRSTWXYZ");
         Config config = new Config(properties);
         kaptcha.setConfig(config);
         return kaptcha;

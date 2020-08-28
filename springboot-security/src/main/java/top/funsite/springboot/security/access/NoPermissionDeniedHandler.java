@@ -19,8 +19,9 @@ import java.io.IOException;
 public class NoPermissionDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-        ResponseWriter.writerJson(response, Result.error(ResponseStatus.FORBIDDEN,null));
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException {
+        ResponseWriter.writerJson(response, Result.error(ResponseStatus.FORBIDDEN, null));
     }
 }
 

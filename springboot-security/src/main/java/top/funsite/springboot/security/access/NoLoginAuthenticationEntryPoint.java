@@ -19,7 +19,8 @@ import java.io.IOException;
 public class NoLoginAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws
+            IOException {
         ResponseWriter.writerJson(response, Result.error(ResponseStatus.UNAUTHORIZED, null));
     }
 

@@ -36,12 +36,15 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getParameter("username"), request.getParameter("password")));
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws
+            AuthenticationException {
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getParameter(
+                "username"), request.getParameter("password")));
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                            FilterChain chain, Authentication authResult) throws IOException {
         User user = (User) authResult.getPrincipal();
         List<Role> authorities = user.getAuthorities();
         String[] roles = new String[authorities.size()];
@@ -56,7 +59,8 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                              AuthenticationException failed) throws IOException {
         ResponseStatus status;
         // 账号过期
         if (failed instanceof AccountExpiredException) {
