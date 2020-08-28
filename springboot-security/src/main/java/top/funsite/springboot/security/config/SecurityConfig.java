@@ -80,13 +80,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                         .permitAll()
                         .defaultSuccessUrl("/index.html")
+                        .failureForwardUrl("/login.html")
                 )
                 // 登出相关
                 .logout(logout -> logout
                                 // 登出接口
-                                .logoutUrl("/logout")
-                                // .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "post"))
+                                // .logoutUrl("/logout")
+                                // httpMethod必须大写
+                                // .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                                // .logoutSuccessUrl("/login.html")
                                 .deleteCookies()
+                                /*.clearAuthentication(true)
+                                .invalidateHttpSession(true)*/
                                 .permitAll()
                         // .addLogoutHandler()
                 )
