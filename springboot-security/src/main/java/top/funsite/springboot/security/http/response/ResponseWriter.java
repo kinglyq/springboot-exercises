@@ -6,6 +6,7 @@ import top.funsite.springboot.security.util.JsonUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -28,14 +29,11 @@ public class ResponseWriter {
     }
 
     private static void write(HttpServletResponse response, String data, MediaType type) throws IOException {
+        PrintWriter out = response.getWriter();
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(type.getType());
-        response.getWriter().write(data);
+        out.write(data);
+        out.flush();
+        out.close();
     }
-
-    public static void main(String[] args) {
-        String type = MediaType.APPLICATION_JSON.getType();
-        System.out.println(type);
-    }
-
 }
