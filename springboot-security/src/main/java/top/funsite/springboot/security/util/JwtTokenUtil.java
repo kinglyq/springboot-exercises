@@ -59,23 +59,18 @@ public class JwtTokenUtil {
                 .claim(USERNAME, username)
                 .claim(ROLES, roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + JwtTokenProperties.expiration.getSeconds()))
+                .setExpiration(new Date(System.currentTimeMillis() + JwtTokenProperties.expiration.toMillis()))
                 .signWith(SignatureAlgorithm.HS256, JwtTokenProperties.appSecretKey).compact();
     }
 
     /**
-     * 校验token
+     * 返回JWT body，失败则抛出异常，见{@link io.jsonwebtoken.JwtParser#parseClaimsJws(String)}，请在调用出做异常处理
      *
      * @param token token
      * @return token body
      */
-    public static Claims checkToken(String token) {
-        try {
-            return Jwts.parser().setSigningKey(JwtTokenProperties.appSecretKey).parseClaimsJws(token).getBody();
-        } catch (Exception e) {
-            log.error(TOKEN_PARSING_ERROR);
-            return null;
-        }
+    public static Claims getJwtBody(String token) {
+        return Jwts.parser().setSigningKey(JwtTokenProperties.appSecretKey).parseClaimsJws(token).getBody();
     }
 
     /**
@@ -85,10 +80,9 @@ public class JwtTokenUtil {
      * @param key   key
      * @return value
      */
-    public static String getTokenBodyValue(String token, String key) {
-        Claims claims = checkToken(token);
-        Assert.notNull(claims, TOKEN_PARSING_ERROR);
-        return claims.get(key).toString();
+    public static String getTokenBodyValue(Claims token, String key) {
+        Assert.notNull(token, "token cannot be null");
+        return token.get(key).toString();
     }
 
     /**
@@ -97,7 +91,7 @@ public class JwtTokenUtil {
      * @param token token
      * @return 用户名
      */
-    public static String getUsername(String token) {
+    public static String getUsername(Claims token) {
         return getTokenBodyValue(token, USERNAME);
     }
 
@@ -107,7 +101,7 @@ public class JwtTokenUtil {
      * @param token token
      * @return 角色数组
      */
-    public static String[] getRoles(String token) {
+    public static String[] getRoles(Claims token) {
         String listRole = getTokenBodyValue(token, ROLES);
         return StringUtils.strip(listRole, "[]").split(", ");
     }
@@ -115,13 +109,13 @@ public class JwtTokenUtil {
     /**
      * 校验token是否过期
      *
-     * @param token token
-     * @return true=过期
+     * @param token JWT body
+     * @return true ? yes : not
+     * @see Claims
      */
-    public static boolean isExpired(String token) {
-        Claims claims = checkToken(token);
-        Assert.notNull(claims, TOKEN_PARSING_ERROR);
-        return claims.getExpiration().before(new Date());
+    public static boolean isExpired(Claims token) {
+        Assert.notNull(token, TOKEN_PARSING_ERROR);
+        return token.getExpiration().before(new Date());
     }
 
     private JwtTokenUtil() {
