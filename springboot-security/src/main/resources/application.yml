@@ -4,6 +4,11 @@ server:
     context-path: /security
     session:
       timeout: 30m
+    # 防止SpringSecurity设置编码为ISO-8859-1
+    encoding:
+      charset: utf-8
+      force: on
+      enabled: on
 
 spring:
   datasource:
