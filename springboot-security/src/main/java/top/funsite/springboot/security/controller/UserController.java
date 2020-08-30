@@ -23,8 +23,9 @@ public class UserController {
      * @see User
      */
     @GetMapping("info")
-    public User getUserInfo(Authentication authentication) {
-        return (User) authentication.getPrincipal();
+    public Object getUserInfo(Authentication authentication) {
+        return authentication.getPrincipal();
+        // return (User) authentication.getPrincipal();
     }
 
 }
