@@ -1,10 +1,9 @@
 package top.funsite.springboot.security.authentication;
 
-import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import top.funsite.springboot.security.http.response.ResponseStatus;
 import top.funsite.springboot.security.http.response.ResponseWriter;
@@ -42,24 +41,38 @@ public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
         }
         // 去掉前缀 获取Token字符串
         token = token.replace(JwtTokenUtil.TOKEN_PREFIX, "");
-        Claims claims = JwtTokenUtil.checkToken(token);
-        ResponseStatus status;
-        // token解析错误
-        if (null == claims) {
-            status = ResponseStatus.TOKEN_PARSING_ERROR;
-            ResponseWriter.writerJson(response, Result.error(status, null));
-            return;
-        }
-        // token过期
-        if (JwtTokenUtil.isExpired(token)) {
-            status = ResponseStatus.TOKEN_EXPIRED;
-            ResponseWriter.writerJson(response, Result.error(status, null));
+        Claims claims = null;
+        try {
+            claims = JwtTokenUtil.getJwtBody(token);
+        } catch (Exception e) {
+            String cause;
+            // JWT过期
+            if (e instanceof ExpiredJwtException) {
+                cause = "token过期";
+            }
+            // JWT格式/配置与应用程序期望的格式不匹配
+            else if (e instanceof UnsupportedJwtException) {
+                cause = "与应用程序期望的格式不匹配";
+            }
+            // 未正确构造JWT
+            else if (e instanceof MalformedJwtException) {
+                cause = "未正确构造token";
+            }
+            // JWT的签名或验证JWT的现有签名失败
+            else if (e instanceof SignatureException) {
+                cause = "签名失败";
+            }
+            // 其它异常
+            else {
+                cause = e.getMessage();
+            }
+            ResponseWriter.writerJson(response, Result.error(ResponseStatus.TOKEN_EXPIRED, cause));
             return;
         }
         // 从token中解密获取用户名
-        String username = JwtTokenUtil.getUsername(token);
+        String username = JwtTokenUtil.getUsername(claims);
         // 从token中解密获取用户角色
-        String[] roles = JwtTokenUtil.getRoles(token);
+        String[] roles = JwtTokenUtil.getRoles(claims);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
@@ -67,8 +80,9 @@ public class ApiAuthenticationFilter extends BasicAuthenticationFilter {
         if (null != username) {
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,
                     null, authorities);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // SecurityContextHolder.getContext().setAuthentication(authentication);
             super.doFilterInternal(request, response, chain);
         }
+
     }
 }

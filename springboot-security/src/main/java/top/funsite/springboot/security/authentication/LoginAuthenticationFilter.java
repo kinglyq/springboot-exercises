@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import top.funsite.springboot.security.entity.Role;
 import top.funsite.springboot.security.entity.User;
@@ -51,9 +52,10 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         for (int i = 0; i < authorities.size(); i++) {
             roles[i] = authorities.get(i).getAuthority();
         }
+        SecurityContextHolder.getContext().setAuthentication(authResult);
         String token = JwtTokenUtil.createToken(user.getId(), Arrays.toString(roles));
         // 设置token
-        response.setHeader("token", JwtTokenUtil.TOKEN_PREFIX + token);
+        response.setHeader("Token", JwtTokenUtil.TOKEN_PREFIX + token);
         // 返回json
         ResponseWriter.writerJson(response, Result.success());
     }

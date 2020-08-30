@@ -19,18 +19,18 @@ public class JwtTokenProperties {
     /**
      * 签名主题
      */
-    public static String subject;
+    public static String subject = "springboot";
 
     /**
      * 有效期（不写单位，默认按照毫秒处理）可用单位：
      * <ul><li>ns 纳秒</li><li>us 微秒</li><li>ms 毫秒</li><li>s 秒</li><li>m 分</li><li>h 时</li><li>d 天</li></ul>
      */
-    public static Duration expiration;
+    public static Duration expiration = Duration.ofSeconds(1800);
 
     /**
      * 密钥
      */
-    public static String appSecretKey;
+    public static String appSecretKey = "security";
 
     public void setSubject(String subject) {
         JwtTokenProperties.subject = subject;
