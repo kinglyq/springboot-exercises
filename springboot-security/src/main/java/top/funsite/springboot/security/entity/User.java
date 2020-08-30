@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
  */
 @ToString
 @JsonIgnoreProperties(value = {"password", "authorities"})
-public class User implements UserDetails {
+public class User /*implements UserDetails*/ {
 
     @Getter
     @Setter
@@ -31,37 +30,37 @@ public class User implements UserDetails {
     @Setter
     private List<Role> authorities;
 
-    @Override
+    //@Override
     public List<Role> getAuthorities() {
         return authorities;
     }
 
-    @Override
+    //@Override
     public String getPassword() {
         return password;
     }
 
-    @Override
+    //@Override
     public String getUsername() {
         return username;
     }
 
-    @Override
+    //@Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
+    //@Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
+    //@Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
+    //@Override
     public boolean isEnabled() {
         return true;
     }

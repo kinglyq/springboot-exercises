@@ -10,12 +10,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import javax.annotation.Resource;
 
 /**
  * Spring Security配置
@@ -27,8 +26,8 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name = "userDetailsServiceImpl")
-    private UserDetailsService userDetailsService;
+    /*@Resource(name = "userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;*/
 
     /**
      * 设置角色大小层级关系
@@ -43,12 +42,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return roleHierarchy;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-       /* auth.inMemoryAuthentication() //认证信息存储到内存中
-                .passwordEncoder(passwordEncoder())
-                .withUser("user").password(passwordEncoder().encode("123456")).roles("admin");*/
+        // auth.userDetailsService(userDetailsService);
+        // 认证信息存储到内存中
+        auth.inMemoryAuthentication().withUser("user").password("1111").roles("admin");
     }
 
     /**
@@ -80,8 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                         .permitAll()
                         .defaultSuccessUrl("/index.html")
-                        .failureForwardUrl("/login.html")
+                        // .failureForwardUrl("/login.html")
                 )
+                .rememberMe()
+                // 设置remember的密钥
+                .key("security")
+                .and()
                 // 登出相关
                 .logout(logout -> logout
                                 // 登出接口
@@ -90,8 +97,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 // .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                                 // .logoutSuccessUrl("/login.html")
                                 .deleteCookies()
-                                /*.clearAuthentication(true)
-                                .invalidateHttpSession(true)*/
+                                // .clearAuthentication(true)
+                                // .invalidateHttpSession(true)
                                 .permitAll()
                         // .addLogoutHandler()
                 )
@@ -120,9 +127,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 异常处理
                 .exceptionHandling()
                 // 匿名用户访问无权限资源时的异常
-                // .authenticationEntryPoint(new NoLoginAuthenticationEntryPoint())
+                //.authenticationEntryPoint(new NoLoginAuthenticationEntryPoint())
                 // 鉴权失败处理
-                // .accessDeniedHandler(new NoPermissionDeniedHandler())
+                //.accessDeniedHandler(new NoPermissionDeniedHandler())
                 .and()
                 .headers(header -> {
                     // 防止打不开h2控制台页面
@@ -142,9 +149,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
-
-    /*public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
 
 }
