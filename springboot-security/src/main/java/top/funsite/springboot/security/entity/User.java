@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 用户信息
@@ -15,7 +16,9 @@ import java.util.List;
  */
 @ToString
 @JsonIgnoreProperties(value = {"password", "authorities"})
-public class User /*implements UserDetails*/ {
+public class User implements UserDetails {
+
+    private static final char TRUE = 'Y';
 
     @Getter
     @Setter
@@ -28,40 +31,65 @@ public class User /*implements UserDetails*/ {
     private String password;
 
     @Setter
-    private List<Role> authorities;
+    private char accountNonExpired;
 
-    //@Override
-    public List<Role> getAuthorities() {
+    @Setter
+    private char accountNonLocked;
+
+    @Setter
+    private char enabled;
+
+    @Setter
+    private Set<Role> authorities;
+
+    @Override
+    public Set<Role> getAuthorities() {
         return authorities;
     }
 
-    //@Override
+    @Override
     public String getPassword() {
         return password;
     }
 
-    //@Override
+    @Override
     public String getUsername() {
         return username;
     }
 
-    //@Override
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    //@Override
+    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    //@Override
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    //@Override
+    @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.username.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof User) {
+            return username.equals(((User) obj).username);
+        }
+        return false;
     }
 }
