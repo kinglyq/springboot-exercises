@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="./assets/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./assets/easyui/themes/icon.css">
+    <script src="./assets/jquery-3.4.1.min.js"></script>
+    <script src="./assets/jquery.cookie-1.4.1.min.js"></script>
+    <script src="./assets/jquery.ajaxSettings.js"></script>
+    <script src="./assets/easyui/jquery.easyui.min.js"></script>
+    <script src="./assets/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <title>Console</title>
+    <style>
+        .easyui-tree a {
+            color: #000;
+            text-decoration-line: none;
+        }
+
+        #easyui-tabs {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body class="easyui-layout" id="layout">
+<div data-options="region:'north',title:'Menu',split:true" style="height:100px;">
+    <div style="float: right;margin-right: 10px">
+        登录成功
+        <a href="/security/logout">退出登录</a>
+    </div>
+</div>
+<!--<div data-options="region:'west',title:'Menu',border:true" id="sm" style="width:200px;"></div>-->
+<div data-options="region:'west',title:'Menu',split:true" id="sm" style="width:210px;"></div>
+<!--class="easyui-tabs" id="easyui-tabs"-->
+<div data-options="region:'center',title:'Main'">
+    <h1>大勺握的紧，饭菜香喷喷</h1>
+</div>
+</body>
+
+<script>
+    const contextPath = "/security";
+
+    $(function () {
+        $.ajax("/menu.json", {
+            type: "get"
+        }).done(function (data) {
+            $('#sm').sidemenu({
+                border: false,
+                multiple: false,
+                width: 210,
+                data: data
+            });
+        });
+    });
+
+    $("#sm").sidemenu({
+        onSelect: function (e) {
+            let tab = e.tab;
+            $('#layout').layout('remove', 'center');
+            let content =
+                '<iframe scrolling="auto" frameborder="0" src="' + contextPath + tab.url +
+                '" style="width:100%;height:99%;"></iframe>';
+            $('#layout').layout('add', {
+                region: 'center',
+                title: tab.title,
+                content: content
+            });
+        }
+    });
+
+    /*$('#sm').sidemenu({
+        onSelect: function (e) {
+            let tab = e.tab;
+            if ($('#easyui-tabs').tabs('exists', tab.title)) {
+                $('#easyui-tabs').tabs('select', tab.title);
+            } else {
+                let content =
+                    '<iframe scrolling="auto" frameborder="0" id="" src="' + contextPath + tab.url +
+                    '" style="width:100%;height:99%;"></iframe>';
+                $('#easyui-tabs').tabs('add', {
+                    title: tab.title,
+                    content: content,
+                    closable: true,
+                    height: '100%',
+                    tools: [{
+                        iconCls: 'icon-mini-refresh',
+                        handler: function () {
+                            window.location.reload();
+                        }
+                    }]
+                });
+            }
+        }
+    });*/
+
+    /*$("#layout").layout({
+        onCollapse: function (region) {
+            console.log(region);
+        }
+    });*/
+
+    /*$('#easyui-tabs').tabs({
+        onBeforeClose: function (title) {
+            return confirm('您确认想要关闭 ' + title);
+        }
+    });*/
+
+</script>
+
+</html>

@@ -1,0 +1,103 @@
+[
+  {
+    "text": "Open",
+    "iconCls": "icon-sum",
+    "children": [
+      {
+        "text": "验证码",
+        "tab": {
+          "url": "/open/code",
+          "title": "验证码"
+        }
+      }
+    ]
+  },
+  {
+    "text": "Login",
+    "iconCls": "icon-sum",
+    "children": [
+      {
+        "text": "Hello",
+        "tab": {
+          "url": "/page/hello",
+          "title": "hello"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      },
+      {
+        "text": "用户信息",
+        "tab": {
+          "url": "/user/info",
+          "title": "用户信息"
+        }
+      }
+    ]
+  },
+  {
+    "text": "Normal",
+    "iconCls": "icon-more",
+    "children": [
+      {
+        "text": "普通权限",
+        "tab": {
+          "url": "/test/normal",
+          "title": "普通权限"
+        }
+      }
+    ]
+  },
+  {
+    "text": "Admin",
+    "iconCls": "icon-more",
+    "children": [
+      {
+        "text": "H2控制台",
+        "tab": {
+          "url": "/h2",
+          "title": "H2控制台"
+        }
+      }
+    ]
+  }
+]

@@ -5,86 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="./assets/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./assets/easyui/themes/icon.css">
     <script src="./assets/jquery-3.4.1.min.js"></script>
     <script src="./assets/jquery.cookie-1.4.1.min.js"></script>
     <script src="./assets/jquery.ajaxSettings.js"></script>
-    <title>Document</title>
+    <script src="./assets/easyui/jquery.easyui.min.js"></script>
+    <script src="./assets/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <title>login</title>
     <style>
-        a {
-            text-decoration: none;
-        }
-
-        fieldset {
-            margin: 0 auto;
-            width: 245px;
-        }
-
-        .login {
+        form {
             text-align: center;
+        }
+
+        .form-item {
+            margin: 10px auto;
+        }
+
+        .easyui-textbox {
+            width: 300px;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrapper">
-        <fieldset>
-            <legend>登录</legend>
-            <!--<form action="#" method="post" id="login-form">-->
-            <form action="/security/login" method="post">
-                <table>
-                    <tr>
-                        <td>用户名</td>
-                        <td>
-                            <label> 
-                                <input type="text" name="username" value="user">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>密码</td>
-                        <td>
-                            <label>
-                                <input type="password" name="password" value="1111">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <label>
-                                <input type="checkbox" name="remember-me" value="on">
-                                <span>记住我</span>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="login">
-                            <!--<input type="button" value="Ajax登录" id="login">-->
-                            <input type="submit" value="表单登录">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </fieldset>
-    </div>
+<div title="用户登录" id="login-window">
+    <!--<form action="#" method="post" id="login-form">-->
+    <form action="/security/login" method="post">
+        <div class="form-item">
+            <label>
+                <input type="text" class="easyui-textbox" name="username" value="oaa"
+                       data-options="label:'用户名:',required:true">
+            </label>
+        </div>
+        <div class="form-item">
+            <label>
+                <input type="password" class="easyui-textbox" name="password" value="0000"
+                       data-options="label:'密码:',required:true">
+            </label>
+        </div>
+        <div class="form-item">
+            <label>
+                <input type="checkbox" name="remember-me" value="on" class="easyui-checkbox">
+            </label>
+            <span>记住我</span>
+        </div>
+        <div class="form-item">
+            <input type="submit" class="easyui-linkbutton" value=" 登录 ">
+        </div>
+    </form>
+</div>
+<script>
 
-    <script>
+    $("#login-window").window({
+        modal: true,
+        width: 350,
+        minimizable: false,
+        maximizable: false,
+        closable: false
+    });
 
-        function login() {
-            let values = $("#login-form").serialize();
-            $.ajax("/login", {
-                type: "post",
-                data: values
-            }).done(function (data, _textStatus, xhr) {
-                if (data.code !== 0) {
-                    $.cookie("token", xhr.getResponseHeader("Token"));
-                }
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
-            })
-        }
+    function login() {
+        let values = $("#login-form").serialize();
+        $.ajax("/login", {
+            type: "post",
+            data: values
+        }).done(function (data, _textStatus, xhr) {
+            if (data.code !== 0) {
+                $.cookie("token", xhr.getResponseHeader("Token"));
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        })
+    }
 
-        // document.getElementById("login").addEventListener("click", login);
-    </script>
+    // document.getElementById("login").addEventListener("click", login);
+</script>
 </body>
 
 </html>
