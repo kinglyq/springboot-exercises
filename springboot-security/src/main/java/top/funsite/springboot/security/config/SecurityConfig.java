@@ -10,11 +10,13 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import javax.annotation.Resource;
 
 /**
  * Spring Security配置
@@ -26,8 +28,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /*@Resource(name = "userDetailsServiceImpl")
-    private UserDetailsService userDetailsService;*/
+    @Resource(name = "userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
 
     /**
      * 设置角色大小层级关系
@@ -42,16 +44,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return roleHierarchy;
     }
 
-    @Bean
+    /**
+     * 返回{@code NoOpPasswordEncoder}则密码无需有<em><strong>{加密方式}<strong/><em/>前缀
+     */
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
-    }
-
+    }*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
         // 认证信息存储到内存中
-        auth.inMemoryAuthentication().withUser("user").password("1111").roles("admin");
+        // auth.inMemoryAuthentication().withUser("user").password("1111").roles("admin");
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
     /**
@@ -71,24 +80,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // 排除的接口
         String[] permits = {
-                "/login", "/open/**", "/h2/**"
+                "/login"
+                , "/open/**"
+                , /*"/h2/**"*/
         };
         http
                 // 前后端不分离
                 // 使用表单直接登录（登录接口默认页面地址）
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login.html")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .permitAll()
-                        .defaultSuccessUrl("/index.html")
+                                .loginPage("/login.html")
+                                .loginProcessingUrl("/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .permitAll()
+                                .defaultSuccessUrl("/index")
                         // .failureForwardUrl("/login.html")
                 )
                 .rememberMe()
+                // 设置cookie时间（单位秒）
+                .tokenValiditySeconds(3600)
+                // .tokenRepository(new InMemoryTokenRepositoryImpl())
                 // 设置remember的密钥
-                .key("security")
+                // .key("security")
+                // 设置rememberMe的name名称
+                // .rememberMeParameter("")
                 .and()
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+                .and().and()
                 // 登出相关
                 .logout(logout -> logout
                                 // 登出接口
@@ -105,9 +125,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 权限设置相关
                 .authorizeRequests(authorize -> authorize
                                 // authorTest 接口需要 admin_test 角色
-                                // .antMatchers("/authorTest").hasRole("admin_test")
+                                .antMatchers("/h2").hasAuthority("admin")
                                 // permits下的请求任何人都可访问
                                 .antMatchers(permits).permitAll()
+                                // 页面不允许通过静态资源路径访问
+                                .antMatchers("/pages/**").denyAll()
                                 // 未排除的所有请求必须经过身份验证方可使用
                                 .anyRequest().authenticated()
                         // 所有请求可访问
