@@ -1,4 +1,4 @@
-/*
+
 package top.funsite.springboot.security.service.impl;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,14 +10,13 @@ import top.funsite.springboot.security.mapper.UserMapper;
 
 import javax.annotation.Resource;
 
-*/
+
 /**
  * {@link UserDetailsService}的实现，从数据库读取用户
  *
  * @author Li Yuqing
  * @date 2020-05-24 11:17:22
- *//*
-
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -30,4 +29,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userMapper.selectUserByName(username);
     }
 }
-*/
+

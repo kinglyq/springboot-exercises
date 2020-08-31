@@ -6,6 +6,9 @@
         <id property="id" column="USER_ID"/>
         <result property="username" column="USERNAME"/>
         <result property="password" column="PASSWORD"/>
+        <result property="enabled" column="ENABLED"/>
+        <result property="accountNonExpired" column="ACCOUNT_NON_EXPIRED"/>
+        <result property="accountNonLocked" column="ACCOUNT_NON_LOCKED"/>
         <collection property="authorities" ofType="top.funsite.springboot.security.entity.Role">
             <id property="id" column="ROLE_ID"/>
             <result property="roleName" column="ROLE_NAME"/>
@@ -15,10 +18,13 @@
 
     <!--  加密方式要小写  -->
     <select id="selectUserByName" resultMap="user">
-        SELECT U.ID AS USER_ID,
+        SELECT U.ID                         AS USER_ID,
                U.USERNAME,
-               CONCAT('{bcrypt}', U.PASSWORD) AS PASSWORD,
-               R.ID AS ROLE_ID,
+               CONCAT('{noop}', U.PASSWORD) AS PASSWORD,
+               U.ENABLED,
+               U.ACCOUNT_NON_EXPIRED,
+               U.ACCOUNT_NON_LOCKED,
+               R.ID                         AS ROLE_ID,
                R.ROLE_NAME,
                R.ROLE_DESC
         FROM USER U
