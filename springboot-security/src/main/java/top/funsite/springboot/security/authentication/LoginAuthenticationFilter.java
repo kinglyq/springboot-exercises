@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 登录拦截器
@@ -47,10 +47,12 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) throws IOException {
         User user = (User) authResult.getPrincipal();
-        List<Role> authorities = user.getAuthorities();
+        Set<Role> authorities = user.getAuthorities();
         String[] roles = new String[authorities.size()];
-        for (int i = 0; i < authorities.size(); i++) {
-            roles[i] = authorities.get(i).getAuthority();
+        int i = 0;
+        for (Role role : authorities) {
+            roles[i] = role.getAuthority();
+            i++;
         }
         SecurityContextHolder.getContext().setAuthentication(authResult);
         String token = JwtTokenUtil.createToken(user.getId(), Arrays.toString(roles));
